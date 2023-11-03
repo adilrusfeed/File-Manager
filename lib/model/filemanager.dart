@@ -21,10 +21,10 @@ class FileManager extends HiveObject {
   File? file;
 
   FileManager(
-       {required this.videopath,
-     required this.name,
-     required this.documentpath,
-     required this.imagepath,
-     required this.musicpath,
+      {required this.videopath,
+      required this.name,
+      required this.documentpath,
+      required this.imagepath,
+      required this.musicpath,
       this.id});
 }

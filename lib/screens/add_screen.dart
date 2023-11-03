@@ -77,32 +77,6 @@ class _AddScreenState extends State<AddScreen> {
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      DropdownButtonHideUnderline(
-                        // Wrap DropdownButton with DropdownButtonHideUnderline
-                        child: DropdownButton<String>(
-                          dropdownColor:
-                              const Color.fromARGB(255, 235, 235, 234),
-                          isExpanded: false,
-                          items: [
-                            ' ',
-                            'Images',
-                            'Videos',
-                            'Audios',
-                            'Documents'
-                          ].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              selectedCategory = value!;
-                            });
-                          },
-                          value: selectedCategory,
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -127,7 +101,7 @@ class _AddScreenState extends State<AddScreen> {
                 ),
                 child: Center(
                     child: Text(
-                  "Add fils",
+                  "Add files",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
               ),

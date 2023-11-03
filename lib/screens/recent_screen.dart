@@ -11,27 +11,10 @@ class RecentScreen extends StatefulWidget {
 
 class _RecentScreenState extends State<RecentScreen> {
   TextEditingController searchController = TextEditingController();
-  List<Map> myProducts =
-      List.generate(100, (index) => {"id": index, "name": "image $index"})
-          .toList();
-  List<Map> filteredProducts = [];
 
   @override
   void initState() {
     super.initState();
-    filteredProducts.addAll(myProducts);
-  }
-
-  void filterProducts(String query) {
-    filteredProducts.clear();
-    if (query.isEmpty) {
-      filteredProducts.addAll(myProducts);
-    } else {
-      filteredProducts.addAll(myProducts
-          .where((product) =>
-              product["name"].toLowerCase().contains(query.toLowerCase()))
-          .toList());
-    }
   }
 
   @override
@@ -60,7 +43,6 @@ class _RecentScreenState extends State<RecentScreen> {
             child: TextField(
               controller: searchController,
               onChanged: (query) {
-                filterProducts(query);
                 setState(() {});
               },
               decoration: InputDecoration(
@@ -69,40 +51,6 @@ class _RecentScreenState extends State<RecentScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 150,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                ),
-                itemCount: filteredProducts.length,
-                itemBuilder: (BuildContext ctx, index) {
-                  return Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/taj.jpeg"),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 100),
-                      child: Text(
-                        filteredProducts[index]["name"],
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 0, 0, 0),
-                            fontSize: 20),
-                      ),
-                    ),
-                  );
-                },
               ),
             ),
           ),
