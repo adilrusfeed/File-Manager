@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({Key? key}) : super(key: key);
@@ -109,7 +111,9 @@ class _AddScreenState extends State<AddScreen> {
             SizedBox(height: 20),
             InkWell(
               hoverColor: Color.fromARGB(255, 0, 0, 0),
-              onTap: () {},
+              onTap: () {
+                pickFiless();
+              },
               child: Container(
                 width: 150,
                 height: 46,
@@ -121,23 +125,33 @@ class _AddScreenState extends State<AddScreen> {
                     color: Colors.black,
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Add File",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ),
-                  ],
-                ),
+                child: Center(
+                    child: Text(
+                  "Add fils",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void pickFiless() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+      allowMultiple: true,
+    );
+
+    if (result == null || result.files.isEmpty) return;
+
+    for (var file in result.files) {
+      viewFile(file);
+    }
+  }
+
+  void viewFile(PlatformFile file) {
+    OpenFile.open(file.path);
   }
 }

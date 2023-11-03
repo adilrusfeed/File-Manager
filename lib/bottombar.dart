@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 import 'package:file_manager/screens/add_screen.dart';
 import 'package:file_manager/screens/chart_screen.dart';
 import 'package:file_manager/screens/home_screen.dart';
