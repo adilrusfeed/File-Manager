@@ -1,5 +1,6 @@
 import 'package:file_manager/bottombar.dart';
-import 'package:file_manager/model/filemanager.dart';
+//import 'package:file_manager/db/function.dart';
+import 'package:file_manager/model/data_model.dart';
 
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //getAlldata();
     return MaterialApp(
       title: 'File organiser',
       debugShowCheckedModeBanner: false,

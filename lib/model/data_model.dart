@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:hive_flutter/hive_flutter.dart';
-part 'filemanager.g.dart';
+part 'data_model.g.dart';
 
 @HiveType(typeId: 0)
 class FileManager extends HiveObject {

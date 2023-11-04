@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'filemanager.dart';
+part of 'data_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

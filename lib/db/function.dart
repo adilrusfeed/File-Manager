@@ -1,19 +1,18 @@
-// import 'package:file_manager/model/filemanager.dart';
-// import 'package:hive/hive.dart';
+// import 'package:file_manager/model/data_model.dart';
+// import 'package:flutter/material.dart';
+// import 'package:hive_flutter/adapters.dart';
 
-// class FileRepository {
-//   final Future<Box<FileManager>> _file =Hive.openBox<FileManager>('File');
-
-//  Future<void> addSub(subdata value) async{
-
-//   final subDB= await Hive.openBox<FileManager>("subdata_db");
-//   await subDB.add(value);
- 
+// ValueNotifier<List<FileManager>> fileManagerNotifier = ValueNotifier([]);
+// Future<void> addData(FileManager value) async {
+//   final dataDB = await Hive.openBox<FileManager>('data_db');
+//   await dataDB.add(value);
+//   fileManagerNotifier.value.add(value);
+//   fileManagerNotifier.notifyListeners();
 // }
-// Future<void> getAlldata()async{
-//   final subDB= await Hive.openBox<FileManager>("subdata_db");
-//   SubListNotifier.value.clear();
-//   SubListNotifier.value.addAll(subDB.values);
-//   SubListNotifier.notifyListeners();
-// }
+
+// Future<void> getAlldata() async {
+//   final dataDB = await Hive.openBox<FileManager>('data_db');
+//   fileManagerNotifier.value.clear();
+//   fileManagerNotifier.value.addAll(dataDB.values);
+//   fileManagerNotifier.notifyListeners();
 // }

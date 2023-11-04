@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 
 class AddScreen extends StatefulWidget {
@@ -12,7 +14,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-// Set a default value
+  PlatformFile? selectedFile; // Store the selected file
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,21 @@ class _AddScreenState extends State<AddScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xFF45A29E),
+        title: Center(
+          child: Text(
+            'ADD',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF45A29E),
-              Color.fromARGB(255, 255, 255, 255),
-            ],
+            colors: [Color(0xFF45A29E), Color(0xFF2F496E)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -35,10 +44,44 @@ class _AddScreenState extends State<AddScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 5),
-            Text("add your files here",
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                "Add Files",
                 style: TextStyle(
-                    fontWeight: FontWeight.w700, color: Colors.white)),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            if (selectedFile != null) // Display the selected file
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      "Selected File:",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      selectedFile!.name,
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             SizedBox(height: 20),
             InkWell(
               onTap: () {
@@ -56,13 +99,23 @@ class _AddScreenState extends State<AddScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Center(
-                    child: Text(
-                  "Add files  +",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                )),
+                  child: Text(
+                    "Add files",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
-            SizedBox(height: 20),
+            if (selectedFile != null) // Display the open button
+              SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                if (selectedFile != null) {
+                  openFile(selectedFile!);
+                }
+              },
+              child: Text("open "),
+            ),
           ],
         ),
       ),
@@ -75,14 +128,22 @@ class _AddScreenState extends State<AddScreen> {
       allowMultiple: true,
     );
 
-    if (result == null || result.files.isEmpty) return;
-
-    for (var file in result.files) {
-      viewFile(file);
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        selectedFile = result.files.first;
+      });
     }
   }
 
-  void viewFile(PlatformFile file) {
-    OpenFile.open(file.path);
+  Future<void> openFile(PlatformFile file) async {
+    final filePath = file.path;
+    final fileName = file.name;
+
+    try {
+      await OpenFile.open(filePath);
+      print(fileName);
+    } catch (error) {
+      print(error);
+    }
   }
 }
