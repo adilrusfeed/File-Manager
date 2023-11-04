@@ -12,7 +12,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  String selectedCategory = " "; // Set a default value
+// Set a default value
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,6 @@ class _AddScreenState extends State<AddScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xFF45A29E),
-        title: Center(
-          child: Text(
-            'ADD',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
-          ),
-        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -42,6 +32,10 @@ class _AddScreenState extends State<AddScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 5),
+            Text("add your files here",
+                style: TextStyle(
+                    fontWeight: FontWeight.w700, color: Colors.white)),
             SizedBox(height: 20),
             InkWell(
               onTap: () {
@@ -60,7 +54,7 @@ class _AddScreenState extends State<AddScreen> {
                 ),
                 child: Center(
                     child: Text(
-                  "Add files",
+                  "Add files  +",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 )),
               ),

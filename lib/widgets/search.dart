@@ -15,7 +15,7 @@ class searchbar extends StatelessWidget {
         decoration: InputDecoration(
             filled: true,
             fillColor: Color.fromARGB(255, 240, 236, 236),
-            suffixIcon: Icon(
+            prefixIcon: Icon(
               Icons.search,
               color: Colors.black,
             ),
