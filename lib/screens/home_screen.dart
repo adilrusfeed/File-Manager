@@ -19,10 +19,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF45A29E),
         title: Center(
           child: Text(
             'FILE MANAGER',
@@ -83,7 +82,17 @@ class HomeScreen extends StatelessWidget {
           ]),
         ),
       ),
-      body: Center(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF45A29E),
+              Color.fromARGB(255, 255, 255, 255),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Column(
           children: [
             SizedBox(height: 1),

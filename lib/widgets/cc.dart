@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,7 +34,7 @@ Container recent({required String img, required String txt}) {
     width: double.infinity,
     height: 70,
     decoration: BoxDecoration(
-      color: Color(0xFFE8E6E6),
+      color: Color.fromARGB(255, 255, 255, 255),
       borderRadius: BorderRadius.circular(20),
     ),
     child: Row(

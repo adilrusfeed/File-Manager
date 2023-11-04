@@ -24,7 +24,10 @@ class _AddScreenState extends State<AddScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF45A29E), Color(0xFF2F496E)],
+            colors: [
+              Color(0xFF45A29E),
+              Color.fromARGB(255, 255, 255, 255),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
