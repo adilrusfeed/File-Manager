@@ -42,20 +42,11 @@ class _AddScreenState extends State<AddScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Add Files",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ),
             SizedBox(height: 20),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                pickFiless();
+              },
               child: Container(
                 height: 66,
                 width: double.infinity,
@@ -67,45 +58,14 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "$selectedCategory",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            InkWell(
-              hoverColor: Color.fromARGB(255, 0, 0, 0),
-              onTap: () {
-                pickFiless();
-              },
-              child: Container(
-                width: 150,
-                height: 46,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 218, 221, 222),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black,
-                  ),
-                ),
                 child: Center(
                     child: Text(
                   "Add files",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 )),
               ),
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),

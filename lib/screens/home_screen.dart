@@ -8,6 +8,7 @@ import 'package:file_manager/screens/recent_screen.dart';
 import 'package:file_manager/setting_page/about.dart';
 import 'package:file_manager/setting_page/terms.dart';
 import 'package:file_manager/widgets/category.dart';
+import 'package:file_manager/widgets/cc.dart';
 import 'package:file_manager/widgets/drawer.dart';
 import 'package:file_manager/widgets/search.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,11 @@ class HomeScreen extends StatelessWidget {
             Divider(),
             DrawerItem(text: "reset", icon: Icons.restore_from_trash_outlined),
             Divider(),
-            DrawerItem(text: "exit", icon: Icons.exit_to_app),
+            GestureDetector(
+                onTap: () {
+                  exitpopup(context);
+                },
+                child: DrawerItem(text: "exit", icon: Icons.exit_to_app)),
             Divider(),
             Padding(
               padding: const EdgeInsets.only(top: 50, left: 60),
@@ -209,65 +214,11 @@ class HomeScreen extends StatelessWidget {
                   recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
                   SizedBox(height: 2),
                   recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Container recent({required String img, required String txt}) {
-    return Container(
-      width: double.infinity,
-      height: 70,
-      decoration: BoxDecoration(
-        color: Color(0xFFE8E6E6),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                img,
-                width: 70,
-                height: 70,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  txt,
-                  style: TextStyle(
-                    color: Color(0xFF000000),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
