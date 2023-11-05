@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 
@@ -57,29 +57,34 @@ class _AddScreenState extends State<AddScreen> {
             ),
             SizedBox(height: 20),
             if (selectedFile != null) // Display the selected file
-              Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      "Selected File:",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+              GestureDetector(
+                onTap: () {
+                  openFile(selectedFile!);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Selected File:",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      selectedFile!.name,
-                      style: TextStyle(
-                        fontSize: 16,
+                      SizedBox(height: 10),
+                      Text(
+                        selectedFile!.name,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             SizedBox(height: 20),
@@ -105,16 +110,6 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                 ),
               ),
-            ),
-            if (selectedFile != null) // Display the open button
-              SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                if (selectedFile != null) {
-                  openFile(selectedFile!);
-                }
-              },
-              child: Text("open "),
             ),
           ],
         ),
