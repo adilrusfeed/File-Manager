@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, prefer_const_constructors_in_immutables
 
+import 'package:file_manager/db/function.dart';
+import 'package:file_manager/model/data_model.dart';
 import 'package:flutter/material.dart';
 
 class RecentScreen extends StatefulWidget {
@@ -14,6 +16,7 @@ class _RecentScreenState extends State<RecentScreen> {
 
   @override
   void initState() {
+    getAlldata();
     super.initState();
   }
 
@@ -35,38 +38,19 @@ class _RecentScreenState extends State<RecentScreen> {
         ),
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF45A29E),
-              Color.fromARGB(255, 255, 255, 255),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: searchController,
-                onChanged: (query) {
-                  setState(() {});
-                },
-                decoration: InputDecoration(
-                  labelText: "Search",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: ValueListenableBuilder<List<FileModel>>(
+          valueListenable: FileNotifier,
+          builder: (context, files, child) {
+            return ListView.builder(
+              itemCount: files.length,
+              itemBuilder: (context, index) {
+                final file = files[index];
+                return ListTile(
+                  title: Text(file.fileName),
+                );
+              },
+            );
+          }),
     );
   }
 }

@@ -1,5 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:io';
+
+import 'package:file_manager/db/function.dart';
+import 'package:file_manager/model/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 //import 'package:url_launcher/url_launcher.dart';
@@ -36,7 +40,10 @@ class _AddScreenState extends State<AddScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF45A29E), Color(0xFF2F496E)],
+            colors: [
+              Color(0xFF45A29E),
+              Color.fromARGB(255, 255, 255, 255),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -44,18 +51,6 @@ class _AddScreenState extends State<AddScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Add Files",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
             if (selectedFile != null) // Display the selected file
               GestureDetector(
                 onTap: () {
@@ -111,6 +106,21 @@ class _AddScreenState extends State<AddScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
+            FloatingActionButton.extended(
+              backgroundColor: Colors.orangeAccent,
+              onPressed: () async {
+                setState(() {
+                  if (selectedFile != null) {
+                    addFile(selectedFile!);
+                    // Close the current screen
+                  } else {
+                    // Handle the case where selectedFile is null or file name/path is missing.
+                  }
+                });
+              },
+              label: Text("Save"),
+            )
           ],
         ),
       ),
@@ -120,7 +130,7 @@ class _AddScreenState extends State<AddScreen> {
   void pickFiless() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.any,
-      allowMultiple: true,
+      allowMultiple: false,
     );
 
     if (result != null && result.files.isNotEmpty) {
