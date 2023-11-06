@@ -1,12 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'dart:io';
-
 import 'package:file_manager/db/function.dart';
-import 'package:file_manager/model/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-//import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 
@@ -110,14 +104,29 @@ class _AddScreenState extends State<AddScreen> {
             FloatingActionButton.extended(
               backgroundColor: Colors.orangeAccent,
               onPressed: () async {
-                setState(() {
-                  if (selectedFile != null) {
-                    addFile(selectedFile!);
-                    // Close the current screen
-                  } else {
-                    // Handle the case where selectedFile is null or file name/path is missing.
-                  }
-                });
+                if (selectedFile != null) {
+                  await addFile(selectedFile!);
+                  setState(() {
+                    selectedFile = null;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      "Added Successfully",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    backgroundColor: Colors.white,
+                  ));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      "Select a File",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    backgroundColor: Colors.white,
+                  ));
+                }
               },
               label: Text("Save"),
             )

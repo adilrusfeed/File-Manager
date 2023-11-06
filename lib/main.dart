@@ -6,9 +6,7 @@ import 'package:file_manager/model/data_model.dart'; // Import your FileModel
 
 void main() async {
   await Hive.initFlutter();
-
   Hive.registerAdapter(FileModelAdapter());
-
   await Hive.openBox<FileModel>("FileModel_db");
 
   runApp(const MyApp());

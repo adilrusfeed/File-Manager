@@ -2,7 +2,10 @@
 
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
+import 'package:flutter/services.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class RecentScreen extends StatefulWidget {
 }
 
 class _RecentScreenState extends State<RecentScreen> {
+  PlatformFile? selectedFile;
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -46,11 +50,26 @@ class _RecentScreenState extends State<RecentScreen> {
               itemBuilder: (context, index) {
                 final file = files[index];
                 return ListTile(
+                  onTap: () {
+                    openFile(selectedFile!);
+                  },
                   title: Text(file.fileName),
                 );
               },
             );
           }),
     );
+  }
+
+  Future<void> openFile(PlatformFile file) async {
+    final filePath = file.path;
+    final fileName = file.name;
+
+    try {
+      await OpenFile.open(filePath);
+      print(fileName);
+    } catch (error) {
+      print(error);
+    }
   }
 }
