@@ -33,7 +33,7 @@ class _RecentScreenState extends State<RecentScreen> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ),
