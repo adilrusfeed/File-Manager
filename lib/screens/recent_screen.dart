@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors
 
-import 'package:file_manager/db/function.dart';
-import 'package:file_manager/model/data_model.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:file_manager/model/data_model.dart';
+import 'package:file_manager/db/function.dart';
 import 'package:open_file/open_file.dart';
 
 class RecentScreen extends StatefulWidget {
@@ -14,6 +13,8 @@ class RecentScreen extends StatefulWidget {
 }
 
 class _RecentScreenState extends State<RecentScreen> {
+  bool isGridView = false; // Default view mode is ListView
+
   @override
   void initState() {
     getAlldata();
@@ -37,25 +38,108 @@ class _RecentScreenState extends State<RecentScreen> {
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),
-      ),
-      body: ValueListenableBuilder<List<FileModel>>(
-        valueListenable: FileNotifier,
-        builder: (context, files, child) {
-          files = files.reversed.toList(); // Reverse the list
-          return ListView.builder(
-            itemCount: files.length,
-            itemBuilder: (context, index) {
-              final file = files[index];
-              return ListTile(
-                onTap: () {
-                  openFile(file);
-                },
-                title: Text(file.fileName),
-              );
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (choice) {
+              setState(() {
+                if (choice == 'gridView') {
+                  isGridView = true;
+                } else if (choice == 'listView') {
+                  isGridView = false;
+                } else if (choice == 'sort') {
+                  // Handle sorting logic
+                }
+              });
             },
-          );
-        },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  value: 'gridView',
+                  child: Text('Grid View'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'listView',
+                  child: Text('List View'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'sort',
+                  child: Text('Sort'),
+                ),
+              ];
+            },
+          ),
+        ],
       ),
+      body: isGridView ? buildGridView() : buildListView(),
+    );
+  }
+
+  Widget buildListView() {
+    return ValueListenableBuilder<List<FileModel>>(
+      valueListenable: FileNotifier,
+      builder: (context, files, child) {
+        files = files.reversed.toList(); // Reverse the list
+        return ListView.builder(
+          itemCount: files.length,
+          itemBuilder: (context, index) {
+            final file = files[index];
+            return ListTile(
+              onTap: () {
+                openFile(file);
+              },
+              title: Text(file.fileName),
+              leading: Icon(Icons.insert_drive_file),
+              trailing: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.drive_file_rename_outline_outlined)),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget buildGridView() {
+    return ValueListenableBuilder<List<FileModel>>(
+      valueListenable: FileNotifier,
+      builder: (context, files, child) {
+        files = files.reversed.toList(); // Reverse the list
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            // Adjust as needed
+          ),
+          itemCount: files.length,
+          itemBuilder: (context, index) {
+            final file = files[index];
+            return GestureDetector(
+              onTap: () {
+                openFile(file);
+              },
+              child: Card(
+                child: Stack(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.filter_none_rounded),
+                        Text(file.fileName),
+                      ],
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.more_vert_outlined)),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 

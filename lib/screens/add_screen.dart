@@ -108,10 +108,12 @@ class _AddScreenState extends State<AddScreen> {
               onPressed: () async {
                 if (selectedFile != null) {
                   await addFile(selectedFile!);
+                  getAlldata();
                   setState(() {
                     selectedFile = null;
                   });
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    duration: Duration(milliseconds: 200),
                     content: Text(
                       "Added Successfully",
                       style: TextStyle(
@@ -121,6 +123,7 @@ class _AddScreenState extends State<AddScreen> {
                   ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    duration: Duration(milliseconds: 200),
                     content: Text(
                       "Select a File",
                       style: TextStyle(
