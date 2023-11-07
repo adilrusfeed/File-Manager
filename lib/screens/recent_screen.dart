@@ -14,6 +14,7 @@ class RecentScreen extends StatefulWidget {
 
 class _RecentScreenState extends State<RecentScreen> {
   bool isGridView = false; // Default view mode is ListView
+  bool isSorted = false;
 
   @override
   void initState() {
@@ -29,7 +30,7 @@ class _RecentScreenState extends State<RecentScreen> {
         backgroundColor: Color(0xFF45A29E),
         title: Center(
           child: Text(
-            'Recents',
+            'All files',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -47,7 +48,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 } else if (choice == 'listView') {
                   isGridView = false;
                 } else if (choice == 'sort') {
-                  // Handle sorting logic
+                  isSorted = !isSorted;
                 }
               });
             },
@@ -78,7 +79,11 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
-        files = files.reversed.toList(); // Reverse the list
+        if (isSorted) {
+          files.sort((a, b) => b.fileName.compareTo(a.fileName));
+        }
+        // Reverse the list (newly added item come top)
+        files = files.reversed.toList();
         return ListView.builder(
           itemCount: files.length,
           itemBuilder: (context, index) {
@@ -103,11 +108,13 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
+        if (isSorted) {
+          files.sort((a, b) => b.fileName.compareTo(a.fileName));
+        }
         files = files.reversed.toList(); // Reverse the list
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            // Adjust as needed
           ),
           itemCount: files.length,
           itemBuilder: (context, index) {
