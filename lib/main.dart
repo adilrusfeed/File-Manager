@@ -5,8 +5,9 @@ import 'package:file_manager/bottombar.dart';
 import 'package:file_manager/model/data_model.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(FileModelAdapter());
+  Hive.registerAdapter<FileModel>(FileModelAdapter());
   await Hive.openBox<FileModel>("FileModel_db");
 
   runApp(const MyApp());

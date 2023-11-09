@@ -8,6 +8,7 @@ ValueNotifier<List<FileModel>> FileNotifier = ValueNotifier([]);
 Future<void> addFile(PlatformFile selectedFile) async {
   final fileDB = await Hive.openBox<FileModel>("FileModel_db");
   final file = FileModel(
+    id: DateTime.now().millisecondsSinceEpoch,
     fileName: selectedFile.name ?? '',
     filePath: selectedFile.path ?? '',
   );
@@ -24,4 +25,30 @@ Future<void> getAlldata() async {
   FileNotifier.value.clear();
   FileNotifier.value.addAll(fileDB.values);
   FileNotifier.notifyListeners();
+}
+
+Future<void> renameFile(FileModel file, String newName) async {
+  try {
+    file.setFileName(newName);
+    final fileDB = await Hive.openBox<FileModel>("FileModel_db");
+    await fileDB.put(file.id, file);
+
+    FileNotifier.value =
+        FileNotifier.value.map((f) => f.id == file.id ? file : f).toList();
+    FileNotifier.notifyListeners();
+  } catch (e) {
+    print('Error in renaming the file:$e');
+  }
+}
+
+Future<void> deleteFile(FileModel file) async {
+  try {
+    final fileDB = await Hive.openBox<FileModel>("FileModel_db");
+    await fileDB.delete(file.id);
+
+    FileNotifier.value.removeWhere((f) => f.id == file.id);
+    FileNotifier.notifyListeners();
+  } catch (e) {
+    print('Error in deleting the file:$e');
+  }
 }
