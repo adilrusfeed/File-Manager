@@ -197,7 +197,8 @@ class _RecentScreenState extends State<RecentScreen> {
 
   void renameFile(FileModel file) async {
     TextEditingController textController = TextEditingController();
-    textController.text = file.fileName;
+    String initilaName = file.fileName.split('.').first;
+    textController.text = initilaName;
 
     await showDialog(
         context: context,
@@ -220,7 +221,17 @@ class _RecentScreenState extends State<RecentScreen> {
                 onPressed: () async {
                   String newName = textController.text;
                   if (newName.isNotEmpty) {
-                    renameFile(file);
+                    String newFileName =
+                        newName + "." + file.fileName.split('.').last;
+                    file.setFileName(newFileName);
+                    final fileDB =
+                        await Hive.openBox<FileModel>("FileModel_db");
+                    await fileDB.put(file.id, file);
+
+                    FileNotifier.value = FileNotifier.value
+                        .map((f) => f.id == file.id ? file : f)
+                        .toList();
+                    FileNotifier.notifyListeners();
                     Navigator.of(context).pop();
                   }
                 },
@@ -262,6 +273,16 @@ class _RecentScreenState extends State<RecentScreen> {
 
         FileNotifier.value.removeWhere((f) => f.id == file.id);
         FileNotifier.notifyListeners();
+
+        // Save changes to Hive immediately
+        await fileDB.compact(); // Compact the box to save space
+        await fileDB.close(); // Close the box after compacting
+
+        // Re-open the box to ensure changes are reflected
+        await Hive.openBox<FileModel>("FileModel_db");
+
+        // Add the following line to refresh the UI immediately
+        setState(() {});
       } catch (e) {
         print('Error in deleting the file: $e');
       }

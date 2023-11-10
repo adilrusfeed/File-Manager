@@ -211,21 +211,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(
-              child: ListView(
-                children: [
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                  SizedBox(height: 2),
-                  recent(img: "assets/images/taj.jpeg", txt: "tajmahal"),
-                ],
-              ),
-            ),
           ],
         ),
       ),
