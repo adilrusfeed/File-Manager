@@ -14,8 +14,16 @@ class RecentScreen extends StatefulWidget {
 }
 
 class _RecentScreenState extends State<RecentScreen> {
+  TextEditingController searchController = TextEditingController();
   bool isGridView = false; // Default view mode is ListView
   bool isSorted = false;
+  String searchQuery = "";
+
+  void onSearchTextChanged(String query) {
+    setState(() {
+      searchQuery = query;
+    });
+  }
 
   @override
   void initState() {
@@ -26,54 +34,80 @@ class _RecentScreenState extends State<RecentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color(0xFF45A29E),
-        title: Center(
-          child: Text(
-            'All files',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: const Color.fromARGB(255, 255, 255, 255),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Color(0xFF45A29E),
+          title: Center(
+            child: Text(
+              'All files',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: const Color.fromARGB(255, 255, 255, 255),
+              ),
             ),
           ),
+          iconTheme: IconThemeData(color: Colors.black),
+          actions: [
+            PopupMenuButton<String>(
+              onSelected: (choice) {
+                setState(() {
+                  if (choice == 'gridView') {
+                    isGridView = true;
+                  } else if (choice == 'listView') {
+                    isGridView = false;
+                  } else if (choice == 'sort') {
+                    isSorted = !isSorted;
+                  }
+                });
+              },
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem<String>(
+                    value: 'gridView',
+                    child: Text('Grid View'),
+                  ),
+                  PopupMenuItem<String>(
+                    value: 'listView',
+                    child: Text('List View'),
+                  ),
+                  PopupMenuItem<String>(
+                    value: 'sort',
+                    child: Text('Sort'),
+                  ),
+                ];
+              },
+            ),
+          ],
         ),
-        iconTheme: IconThemeData(color: Colors.black),
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (choice) {
-              setState(() {
-                if (choice == 'gridView') {
-                  isGridView = true;
-                } else if (choice == 'listView') {
-                  isGridView = false;
-                } else if (choice == 'sort') {
-                  isSorted = !isSorted;
-                }
-              });
-            },
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem<String>(
-                  value: 'gridView',
-                  child: Text('Grid View'),
-                ),
-                PopupMenuItem<String>(
-                  value: 'listView',
-                  child: Text('List View'),
-                ),
-                PopupMenuItem<String>(
-                  value: 'sort',
-                  child: Text('Sort'),
-                ),
-              ];
-            },
-          ),
-        ],
-      ),
-      body: isGridView ? buildGridView() : buildListView(),
-    );
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: TextField(
+                controller: searchController,
+                onChanged: onSearchTextChanged,
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 240, 236, 236),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    hintText: 'Search Files',
+                    hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 192, 187, 187),
+                        fontWeight: FontWeight.w500),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20))),
+              ),
+            ),
+            Divider(),
+            Expanded(
+              child: isGridView ? buildGridView() : buildListView(),
+            )
+          ],
+        ));
   }
 
   Widget buildListView() {
@@ -85,6 +119,15 @@ class _RecentScreenState extends State<RecentScreen> {
         }
         // Reverse the list (newly added item come top)
         files = files.reversed.toList();
+
+        if (searchQuery.isNotEmpty) {
+          files = files
+              .where((file) => file.fileName
+                  .toLowerCase()
+                  .contains(searchQuery.toLowerCase()))
+              .toList();
+        }
+
         return ListView.builder(
           itemCount: files.length,
           itemBuilder: (context, index) {
@@ -130,6 +173,15 @@ class _RecentScreenState extends State<RecentScreen> {
           files.sort((a, b) => b.fileName.compareTo(a.fileName));
         }
         files = files.reversed.toList(); // Reverse the list
+
+        if (searchQuery.isNotEmpty) {
+          files = files
+              .where((file) => file.fileName
+                  .toLowerCase()
+                  .contains(searchQuery.toLowerCase()))
+              .toList();
+        }
+
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -147,7 +199,7 @@ class _RecentScreenState extends State<RecentScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.filter_none_rounded),
+                        Icon(Icons.insert_drive_file),
                         Text(file.fileName),
                       ],
                     ),
