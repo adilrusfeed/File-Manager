@@ -33,8 +33,8 @@ Future<void> deleteFile(index) async {
   getAlldata();
 }
 
-Future<void> updateFood(int index, FileModel newValue) async {
-  final Fooddb = await Hive.openBox<FileModel>('FileModel_db');
-  await Fooddb.putAt(index, newValue);
-  // getfood(); // Refresh the list after update
+Future<void> renameFile(int index, FileModel newValue) async {
+  final fileDB = await Hive.openBox<FileModel>('FileModel_db');
+  await fileDB.putAt(index, newValue);
+  getAlldata(); // Refresh the list after update
 }
