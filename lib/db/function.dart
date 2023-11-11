@@ -26,3 +26,15 @@ Future<void> getAlldata() async {
   FileNotifier.value.addAll(fileDB.values);
   FileNotifier.notifyListeners();
 }
+
+Future<void> deleteFile(index) async {
+  final fileDB = await Hive.openBox<FileModel>('FileModel_db');
+  await fileDB.deleteAt(index);
+  getAlldata();
+}
+
+Future<void> updateFood(int index, FileModel newValue) async {
+  final Fooddb = await Hive.openBox<FileModel>('FileModel_db');
+  await Fooddb.putAt(index, newValue);
+  // getfood(); // Refresh the list after update
+}

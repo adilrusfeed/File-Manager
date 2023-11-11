@@ -141,9 +141,11 @@ class _RecentScreenState extends State<RecentScreen> {
                 trailing: PopupMenuButton<String>(
                   onSelected: (choice) {
                     if (choice == "rename") {
-                      renameFile(file);
+                      setState(() {
+                        renameFile(file);
+                      });
                     } else if (choice == "delete") {
-                      deleteFile(file);
+                      deleteFile(index);
                     }
                   },
                   itemBuilder: (BuildContext context) {
@@ -211,7 +213,7 @@ class _RecentScreenState extends State<RecentScreen> {
                             if (choice == "rename") {
                               renameFile(file);
                             } else if (choice == "delete") {
-                              deleteFile(file);
+                              deleteFile(index);
                             }
                           },
                           itemBuilder: (BuildContext context) {
@@ -272,72 +274,26 @@ class _RecentScreenState extends State<RecentScreen> {
                 child: Text("rename"),
                 onPressed: () async {
                   String newName = textController.text;
-                  if (newName.isNotEmpty) {
-                    String newFileName =
-                        newName + "." + file.fileName.split('.').last;
-                    file.setFileName(newFileName);
-                    final fileDB =
-                        await Hive.openBox<FileModel>("FileModel_db");
-                    await fileDB.put(file.id, file);
+                  setState(() async {
+                    if (newName.isNotEmpty) {
+                      String newFileName =
+                          newName + "." + file.fileName.split('.').last;
+                      file.setFileName(newFileName);
+                      final fileDB =
+                          await Hive.openBox<FileModel>("FileModel_db");
+                      await fileDB.put(file.id, file);
 
-                    FileNotifier.value = FileNotifier.value
-                        .map((f) => f.id == file.id ? file : f)
-                        .toList();
-                    FileNotifier.notifyListeners();
-                    Navigator.of(context).pop();
-                  }
+                      FileNotifier.value = FileNotifier.value
+                          .map((f) => f.id == file.id ? file : f)
+                          .toList();
+                      FileNotifier.notifyListeners();
+                      Navigator.of(context).pop();
+                    }
+                  });
                 },
               )
             ],
           );
         });
-  }
-
-  void deleteFile(FileModel file) async {
-    final isConfirmed = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Confirm Deletion"),
-          content: Text("Are you sure you want to delete ${file.fileName}?"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("Cancel"),
-              onPressed: () {
-                Navigator.of(context).pop(false); // Return false if canceled
-              },
-            ),
-            TextButton(
-              child: Text("Delete"),
-              onPressed: () {
-                Navigator.of(context).pop(true); // Return true if confirmed
-              },
-            ),
-          ],
-        );
-      },
-    );
-
-    if (isConfirmed == true) {
-      try {
-        final fileDB = await Hive.openBox<FileModel>("FileModel_db");
-        await fileDB.delete(file.id);
-
-        FileNotifier.value.removeWhere((f) => f.id == file.id);
-        FileNotifier.notifyListeners();
-
-        // Save changes to Hive immediately
-        await fileDB.compact(); // Compact the box to save space
-        await fileDB.close(); // Close the box after compacting
-
-        // Re-open the box to ensure changes are reflected
-        await Hive.openBox<FileModel>("FileModel_db");
-
-        // Add the following line to refresh the UI immediately
-        setState(() {});
-      } catch (e) {
-        print('Error in deleting the file: $e');
-      }
-    }
   }
 }
