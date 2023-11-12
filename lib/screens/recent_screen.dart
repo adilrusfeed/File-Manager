@@ -78,7 +78,7 @@ class _RecentScreenState extends State<RecentScreen> {
                         children: [
                           Icon(Icons.list),
                           SizedBox(width: 10),
-                          Text('List View'),
+                          Text("List View")
                         ],
                       )),
                   PopupMenuItem<String>(
@@ -87,7 +87,7 @@ class _RecentScreenState extends State<RecentScreen> {
                         children: [
                           Icon(Icons.sort),
                           SizedBox(width: 10),
-                          Text('Sort'),
+                          Text("Sort")
                         ],
                       )),
                 ];
