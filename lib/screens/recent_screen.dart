@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
@@ -64,17 +64,32 @@ class _RecentScreenState extends State<RecentScreen> {
               itemBuilder: (BuildContext context) {
                 return [
                   PopupMenuItem<String>(
-                    value: 'gridView',
-                    child: Text('Grid View'),
-                  ),
+                      value: 'gridView',
+                      child: Row(
+                        children: [
+                          Icon(Icons.grid_view),
+                          SizedBox(width: 10),
+                          Text("Grid View")
+                        ],
+                      )),
                   PopupMenuItem<String>(
-                    value: 'listView',
-                    child: Text('List View'),
-                  ),
+                      value: 'listView',
+                      child: Row(
+                        children: [
+                          Icon(Icons.list),
+                          SizedBox(width: 10),
+                          Text('List View'),
+                        ],
+                      )),
                   PopupMenuItem<String>(
-                    value: 'sort',
-                    child: Text('Sort'),
-                  ),
+                      value: 'sort',
+                      child: Row(
+                        children: [
+                          Icon(Icons.sort),
+                          SizedBox(width: 10),
+                          Text('Sort'),
+                        ],
+                      )),
                 ];
               },
             ),
