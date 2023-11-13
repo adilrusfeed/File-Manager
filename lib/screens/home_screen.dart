@@ -23,13 +23,12 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xFF45A29E),
-        title: Center(
-          child: Text(
-            'FILE MANAGER',
-            style: TextStyle(
-                fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black),
-          ),
+        title: Text(
+          'FILE MANAGER',
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black),
         ),
+        centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
       ),
       drawer: Drawer(
