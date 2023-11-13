@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +35,13 @@ Future<void> deleteFile(index) async {
   getAlldata();
 }
 
-Future<void> renameFile(int index, FileModel newValue) async {
+Future<void> renameFile(int id, FileModel newValue) async {
   final fileDB = await Hive.openBox<FileModel>('FileModel_db');
-  await fileDB.putAt(index, newValue);
+  await fileDB.putAt(id, newValue);
 
-  FileNotifier.value[index] = newValue;
-  FileNotifier.notifyListeners();
+  int index = FileNotifier.value.indexWhere((file) => file.id == id);
+  if (index != -1) {
+    FileNotifier.value[index] = newValue;
+    FileNotifier.notifyListeners();
+  }
 }

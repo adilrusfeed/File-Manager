@@ -144,7 +144,7 @@ class _AddScreenState extends State<AddScreen> {
   void pickFiless() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.any,
-      allowMultiple: false,
+      allowMultiple: true,
     );
 
     if (result != null && result.files.isNotEmpty) {

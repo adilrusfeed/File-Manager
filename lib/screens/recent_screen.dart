@@ -266,49 +266,52 @@ class _RecentScreenState extends State<RecentScreen> {
 
   void renameFile(FileModel file) async {
     TextEditingController textController = TextEditingController();
-    String initilaName = file.fileName.split('.').first;
-    textController.text = initilaName;
+    String initialName = file.fileName.split('.').first;
+    textController.text = initialName;
 
     await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("rename file"),
-            content: TextField(
-              controller: textController,
-              decoration: InputDecoration(labelText: "new name"),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Rename file"),
+          content: TextField(
+            controller: textController,
+            decoration: InputDecoration(labelText: "New name"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog without saving
+              },
+              child: Text("Cancel"),
             ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("cancel"),
-              ),
-              TextButton(
-                child: Text("rename"),
-                onPressed: () async {
-                  String newName = textController.text;
-                  setState(() async {
-                    if (newName.isNotEmpty) {
-                      String newFileName =
-                          newName + "." + file.fileName.split('.').last;
-                      file.setFileName(newFileName);
-                      final fileDB =
-                          await Hive.openBox<FileModel>("FileModel_db");
-                      await fileDB.put(file.id, file);
+            TextButton(
+              child: Text("Rename"),
+              onPressed: () async {
+                String newName = textController.text;
+                if (newName.isNotEmpty) {
+                  String newFileName =
+                      newName + "." + file.fileName.split('.').last;
+                  file.fileName =
+                      newFileName; // Update the file name in the FileModel object
 
-                      FileNotifier.value = FileNotifier.value
-                          .map((f) => f.id == file.id ? file : f)
-                          .toList();
-                      FileNotifier.notifyListeners();
-                      Navigator.of(context).pop();
-                    }
-                  });
-                },
-              )
-            ],
-          );
-        });
+                  final fileDB = await Hive.openBox<FileModel>("FileModel_db");
+                  await fileDB.put(file.id, file);
+
+                  int index =
+                      FileNotifier.value.indexWhere((f) => f.id == file.id);
+                  if (index != -1) {
+                    FileNotifier.value[index] = file;
+                    FileNotifier.notifyListeners();
+                  }
+
+                  Navigator.of(context).pop(); // Close the dialog after saving
+                }
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }
