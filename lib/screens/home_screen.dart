@@ -10,6 +10,7 @@ import 'package:file_manager/setting_page/terms.dart';
 import 'package:file_manager/widgets/category.dart';
 import 'package:file_manager/widgets/cc.dart';
 import 'package:file_manager/widgets/drawer.dart';
+import 'package:file_manager/widgets/reset.dart';
 import 'package:file_manager/widgets/search.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,12 @@ class HomeScreen extends StatelessWidget {
                   icon: Icons.document_scanner_rounded),
             ),
             Divider(),
-            DrawerItem(text: "reset", icon: Icons.restore_from_trash_outlined),
+            GestureDetector(
+                onTap: () {
+                  resetDB(context);
+                },
+                child: DrawerItem(
+                    text: "reset", icon: Icons.restore_from_trash_outlined)),
             Divider(),
             GestureDetector(
                 onTap: () {

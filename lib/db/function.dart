@@ -33,10 +33,10 @@ Future<void> deleteFile(index) async {
   getAlldata();
 }
 
-Future<void> renameFile(int index, FileModel newValue) async {
+Future<void> renameFile(int id, FileModel newValue) async {
   final fileDB = await Hive.openBox<FileModel>('FileModel_db');
-  await fileDB.putAt(index, newValue);
+  await fileDB.put(id, newValue);
 
-  FileNotifier.value[index] = newValue;
+  FileNotifier.value[id] = newValue;
   FileNotifier.notifyListeners();
 }
