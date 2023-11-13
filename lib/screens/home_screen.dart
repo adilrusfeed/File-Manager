@@ -6,11 +6,12 @@ import 'package:file_manager/catogory_screen/image_screen.dart';
 import 'package:file_manager/catogory_screen/video_screen.dart';
 import 'package:file_manager/screens/recent_screen.dart';
 import 'package:file_manager/setting_page/about.dart';
+import 'package:file_manager/setting_page/exit.dart';
 import 'package:file_manager/setting_page/terms.dart';
 import 'package:file_manager/widgets/category.dart';
-import 'package:file_manager/widgets/cc.dart';
+
 import 'package:file_manager/widgets/drawer.dart';
-import 'package:file_manager/widgets/reset.dart';
+import 'package:file_manager/setting_page/reset.dart';
 import 'package:file_manager/widgets/search.dart';
 import 'package:flutter/material.dart';
 

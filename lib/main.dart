@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:file_manager/bottombar.dart';
+import 'package:file_manager/widgets/bottombar.dart';
 import 'package:file_manager/model/data_model.dart';
 
 Future<void> main() async {

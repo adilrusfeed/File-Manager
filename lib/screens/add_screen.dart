@@ -47,7 +47,7 @@ class _AddScreenState extends State<AddScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (selectedFile != null) // Display the selected file
+            if (selectedFile != null)
               GestureDetector(
                 onTap: () {
                   openFile(selectedFile!);

@@ -1,8 +1,8 @@
 //clear from db - reset
 
-import 'package:file_manager/bottombar.dart';
+import 'package:file_manager/widgets/bottombar.dart';
 import 'package:file_manager/model/data_model.dart';
-import 'package:file_manager/screens/home_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 

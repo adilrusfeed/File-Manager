@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
-import 'package:hive/hive.dart';
 import 'package:open_file/open_file.dart';
 
 class RecentScreen extends StatefulWidget {

@@ -7,7 +7,6 @@ class ImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Replace this with your image display logic
     return Scaffold(
       appBar: AppBar(
         title: Text('Images'),
