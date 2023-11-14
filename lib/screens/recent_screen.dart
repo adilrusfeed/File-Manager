@@ -157,7 +157,7 @@ class _RecentScreenState extends State<RecentScreen> {
                         renameFile(file);
                       });
                     } else if (choice == "delete") {
-                      deleteFile(context);
+                      deleteFile(file);
                     }
                   },
                   itemBuilder: (BuildContext context) {
@@ -225,7 +225,7 @@ class _RecentScreenState extends State<RecentScreen> {
                             if (choice == "rename") {
                               renameFile(file);
                             } else if (choice == "delete") {
-                              deleteFile(context);
+                              deleteFile(file);
                             }
                           },
                           itemBuilder: (BuildContext context) {

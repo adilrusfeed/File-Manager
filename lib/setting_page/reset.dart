@@ -9,7 +9,6 @@ import 'package:hive/hive.dart';
 Future<void> resetDB(
   BuildContext context,
 ) async {
-  // ignore: use_build_context_synchronously
   bool confirmReset = await showDialog(
     context: context,
     builder: (BuildContext context) {

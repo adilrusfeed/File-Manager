@@ -28,16 +28,18 @@ Future<void> getAlldata() async {
   FileNotifier.notifyListeners();
 }
 
-Future<void> deleteFile(index) async {
+Future<void> deleteFile(FileModel file) async {
   final fileDB = await Hive.openBox<FileModel>('FileModel_db');
+  final index = fileDB.values.toList().indexOf(file);
   await fileDB.deleteAt(index);
   getAlldata();
 }
 
 Future<void> renameFile(int id, FileModel newValue) async {
   final fileDB = await Hive.openBox<FileModel>('FileModel_db');
-  await fileDB.put(id, newValue);
-
+  FileNotifier.value.clear();
+  FileNotifier.value.addAll(fileDB.values);
+  await fileDB.putAt(id, newValue);
   FileNotifier.value[id] = newValue;
   FileNotifier.notifyListeners();
 }
