@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:file_manager/catogory_screen/audio_screen.dart';
-import 'package:file_manager/catogory_screen/document.dart';
+import 'package:file_manager/catogory_screen/document_screen.dart';
 import 'package:file_manager/catogory_screen/image_screen.dart';
 import 'package:file_manager/catogory_screen/video_screen.dart';
 import 'package:file_manager/screens/recent_screen.dart';

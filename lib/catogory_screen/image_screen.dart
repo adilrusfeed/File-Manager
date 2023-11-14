@@ -5,8 +5,15 @@ import 'package:file_manager/model/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
-class ImageScreen extends StatelessWidget {
-  const ImageScreen({Key? key});
+class ImageScreen extends StatefulWidget {
+  const ImageScreen({Key? key}) : super(key: key);
+
+  @override
+  _ImageScreenState createState() => _ImageScreenState();
+}
+
+class _ImageScreenState extends State<ImageScreen> {
+  bool _isAscending = true;
 
   bool isImageFile(String fileName) {
     var imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
@@ -19,17 +26,31 @@ class ImageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Images'),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _isAscending = !_isAscending;
+                });
+              },
+              child: Text("sort")),
+        ],
       ),
       body: Container(
         child: ValueListenableBuilder<List<FileModel>>(
           valueListenable: FileNotifier,
           builder: (context, files, child) {
-            files = files.reversed.toList();
+            List<FileModel> sortedFiles = List.from(files);
+            sortedFiles.sort((a, b) {
+              return _isAscending
+                  ? a.fileName.compareTo(b.fileName)
+                  : b.fileName.compareTo(a.fileName);
+            });
 
             return ListView.builder(
-              itemCount: files.length,
+              itemCount: sortedFiles.length,
               itemBuilder: (context, index) {
-                final file = files[index];
+                final file = sortedFiles[index];
 
                 if (isImageFile(file.fileName)) {
                   return ListTile(
@@ -38,27 +59,6 @@ class ImageScreen extends StatelessWidget {
                     },
                     title: Text(file.fileName),
                     leading: Icon(Icons.insert_drive_file),
-                    // trailing: PopupMenuButton<String>(
-                    //   onSelected: (choice) {
-                    //     if (choice == "rename") {
-                    //       renameFile(index, file);
-                    //     } else if (choice == "delete") {
-                    //       deleteFile(file);
-                    //     }
-                    //   },
-                    //   itemBuilder: (BuildContext context) {
-                    //     return [
-                    //       PopupMenuItem<String>(
-                    //         value: 'rename',
-                    //         child: Text('Rename'),
-                    //       ),
-                    //       PopupMenuItem<String>(
-                    //         value: 'delete',
-                    //         child: Text('Delete'),
-                    //       ),
-                    //     ];
-                    //   },
-                    // ),
                   );
                 } else {
                   return Container(); // Filter out non-image files
