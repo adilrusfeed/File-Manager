@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: categoryContainer(
                           imagePath: "assets/images/video.png",
-                          containerText: "gallery",
+                          containerText: "videos",
                         ),
                       ),
                       SizedBox(

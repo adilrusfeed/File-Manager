@@ -5,29 +5,29 @@ import 'package:file_manager/model/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
-class AudioScreen extends StatelessWidget {
-  const AudioScreen({super.key});
+class DocumentScreen extends StatelessWidget {
+  const DocumentScreen({super.key});
 
-  bool isAudioFile(String fileName) {
-    var audioExtension = [
-      '.mkv',
-      '.mp4',
-      '.avi',
-      '.flv',
-      '.wmv',
-      '.mov',
-      '.3gp',
-      '.webm'
+  bool isDocumentFile(String fileName) {
+    var documentExtension = [
+      '.pdf',
+      '.doc',
+      '.txt',
+      '.ppt',
+      '.docx',
+      '.pptx',
+      '.xlxs',
+      '.xls'
     ];
     var extension = path.extension(fileName).toLowerCase();
-    return audioExtension.contains(extension);
+    return documentExtension.contains(extension);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("audios"),
+        title: Text("videos"),
       ),
       body: Container(
         child: ValueListenableBuilder<List<FileModel>>(
@@ -40,7 +40,7 @@ class AudioScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final file = files[index];
 
-                  if (isAudioFile(file.fileName)) {
+                  if (isDocumentFile(file.fileName)) {
                     return ListTile(
                       onTap: () {
                         openFile(file);
