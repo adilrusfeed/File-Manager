@@ -22,13 +22,21 @@ class ChartScreen extends StatelessWidget {
         actionsIconTheme: IconThemeData(color: Colors.black),
       ),
       body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(20.0),
+        Center(
           child: Text(
             "storage details",
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
           ),
         ),
+        SizedBox(height: 25),
+        Text(
+          "here you can know how many files you added ",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        Image.asset("assets/images/Screenshot 2023-11-14 112058.png")
       ]),
     );
   }

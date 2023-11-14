@@ -27,7 +27,7 @@ class _BottomBarState extends State<BottomBar> {
         body: pages[myindex],
         bottomNavigationBar: CurvedNavigationBar(
             backgroundColor: Colors.white,
-            color: Color.fromARGB(255, 113, 216, 211),
+            color: Color.fromARGB(255, 152, 154, 154),
             animationDuration: Duration(milliseconds: 500),
             onTap: (index) {
               setState(() {

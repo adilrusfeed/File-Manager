@@ -12,8 +12,4 @@ class FileModel {
   String filePath;
 
   FileModel({required this.id, required this.fileName, required this.filePath});
-
-  void setFileName(String newName) {
-    fileName = newName;
-  }
 }

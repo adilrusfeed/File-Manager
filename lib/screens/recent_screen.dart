@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
-import 'package:open_file/open_file.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
@@ -35,17 +34,16 @@ class _RecentScreenState extends State<RecentScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Color(0xFF45A29E),
-          title: Center(
-            child: Text(
-              'All files',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: const Color.fromARGB(255, 255, 255, 255),
-              ),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          title: Text(
+            'All files',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
+          centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
           actions: [
             PopupMenuButton<String>(
@@ -159,7 +157,7 @@ class _RecentScreenState extends State<RecentScreen> {
                         renameFile(file);
                       });
                     } else if (choice == "delete") {
-                      deleteFile(index);
+                      deleteFile(context);
                     }
                   },
                   itemBuilder: (BuildContext context) {
@@ -227,7 +225,7 @@ class _RecentScreenState extends State<RecentScreen> {
                             if (choice == "rename") {
                               renameFile(file);
                             } else if (choice == "delete") {
-                              deleteFile(index);
+                              deleteFile(context);
                             }
                           },
                           itemBuilder: (BuildContext context) {
@@ -251,16 +249,6 @@ class _RecentScreenState extends State<RecentScreen> {
         );
       },
     );
-  }
-
-  Future<void> openFile(FileModel file) async {
-    final filePath = file.filePath;
-
-    try {
-      await OpenFile.open(filePath);
-    } catch (error) {
-      print(error);
-    }
   }
 
   void renameFile(FileModel file) async {
