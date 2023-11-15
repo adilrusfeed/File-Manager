@@ -12,4 +12,6 @@ class FileModel {
   String filePath;
 
   FileModel({required this.id, required this.fileName, required this.filePath});
+
+  get fileExtension => null;
 }

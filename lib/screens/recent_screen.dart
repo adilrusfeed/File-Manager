@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
@@ -151,16 +151,15 @@ class _RecentScreenState extends State<RecentScreen> {
           itemBuilder: (context, index) {
             final file = files[index];
             return Container(
-                color: index % 2 == 0 ? Colors.teal[400] : Colors.teal[200],
+                color: index % 2 == 0
+                    ? Color.fromARGB(255, 237, 236, 233)
+                    : Color.fromARGB(255, 235, 235, 214),
                 child: ListTile(
                     onTap: () {
                       openFile(file);
                     },
                     title: Text(file.fileName),
-                    leading: Icon(
-                      Icons.insert_drive_file,
-                      color: Colors.black,
-                    ),
+                    leading: Icon(Icons.file_copy),
                     trailing: PopupMenuButton<String>(
                       onSelected: (choice) {
                         if (choice == "rename") {
@@ -224,7 +223,7 @@ class _RecentScreenState extends State<RecentScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.insert_drive_file),
+                        Icon(Icons.file_copy_rounded),
                         Text(file.fileName),
                       ],
                     ),

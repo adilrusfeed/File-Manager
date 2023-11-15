@@ -4,7 +4,6 @@ import 'package:file_manager/catogory_screen/audio_screen.dart';
 import 'package:file_manager/catogory_screen/document_screen.dart';
 import 'package:file_manager/catogory_screen/image_screen.dart';
 import 'package:file_manager/catogory_screen/video_screen.dart';
-import 'package:file_manager/db/function.dart';
 import 'package:file_manager/screens/recent_screen.dart';
 import 'package:file_manager/setting_page/about.dart';
 import 'package:file_manager/setting_page/exit.dart';
