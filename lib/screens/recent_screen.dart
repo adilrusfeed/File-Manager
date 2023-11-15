@@ -127,7 +127,11 @@ class _RecentScreenState extends State<RecentScreen> {
       valueListenable: FileNotifier,
       builder: (context, files, child) {
         if (isSorted) {
-          files.sort((a, b) => b.fileName.compareTo(a.fileName));
+          files.sort((a, b) {
+            return isSorted
+                ? b.fileName.compareTo(a.fileName)
+                : a.fileName.compareTo(b.fileName);
+          });
         }
         // Reverse the list (newly added item come top)
         files = files.reversed.toList();

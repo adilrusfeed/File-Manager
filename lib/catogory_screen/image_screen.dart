@@ -43,8 +43,8 @@ class _ImageScreenState extends State<ImageScreen> {
             List<FileModel> sortedFiles = List.from(files);
             sortedFiles.sort((a, b) {
               return _isAscending
-                  ? a.fileName.compareTo(b.fileName)
-                  : b.fileName.compareTo(a.fileName);
+                  ? b.fileName.compareTo(a.fileName)
+                  : a.fileName.compareTo(b.fileName);
             });
 
             return ListView.builder(

@@ -27,7 +27,7 @@ class DocumentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("videos"),
+        title: Text("documents"),
       ),
       body: Container(
         child: ValueListenableBuilder<List<FileModel>>(
