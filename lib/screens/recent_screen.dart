@@ -13,7 +13,9 @@ class RecentScreen extends StatefulWidget {
 
 class _RecentScreenState extends State<RecentScreen> {
   TextEditingController searchController = TextEditingController();
-  bool isGridView = false; // Default view mode is ListView
+
+  // -------------Default view mode is ListView --------------------------
+  bool isGridView = false;
   bool isSorted = false;
   String searchQuery = "";
 
@@ -65,7 +67,7 @@ class _RecentScreenState extends State<RecentScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.grid_view),
-                          SizedBox(width: 10),
+                          SizedBox(width: 13),
                           Text("Grid View")
                         ],
                       )),
@@ -74,7 +76,7 @@ class _RecentScreenState extends State<RecentScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.list),
-                          SizedBox(width: 10),
+                          SizedBox(width: 13),
                           Text("List View")
                         ],
                       )),
@@ -83,7 +85,7 @@ class _RecentScreenState extends State<RecentScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.sort),
-                          SizedBox(width: 10),
+                          SizedBox(width: 13),
                           Text("Sort")
                         ],
                       )),
@@ -148,35 +150,40 @@ class _RecentScreenState extends State<RecentScreen> {
           itemCount: files.length,
           itemBuilder: (context, index) {
             final file = files[index];
-            return ListTile(
-                onTap: () {
-                  openFile(file);
-                },
-                title: Text(file.fileName),
-                leading: Icon(Icons.insert_drive_file),
-                trailing: PopupMenuButton<String>(
-                  onSelected: (choice) {
-                    if (choice == "rename") {
-                      setState(() {
-                        renameFile(file);
-                      });
-                    } else if (choice == "delete") {
-                      deleteFile(file);
-                    }
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return [
-                      PopupMenuItem<String>(
-                        value: 'rename',
-                        child: Text('Rename'),
-                      ),
-                      PopupMenuItem<String>(
-                        value: 'delete',
-                        child: Text('Delete'),
-                      ),
-                    ];
-                  },
-                ));
+            return Container(
+                color: index % 2 == 0 ? Colors.teal[400] : Colors.teal[200],
+                child: ListTile(
+                    onTap: () {
+                      openFile(file);
+                    },
+                    title: Text(file.fileName),
+                    leading: Icon(
+                      Icons.insert_drive_file,
+                      color: Colors.black,
+                    ),
+                    trailing: PopupMenuButton<String>(
+                      onSelected: (choice) {
+                        if (choice == "rename") {
+                          setState(() {
+                            renameFile(file);
+                          });
+                        } else if (choice == "delete") {
+                          deleteFile(file);
+                        }
+                      },
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          PopupMenuItem<String>(
+                            value: 'rename',
+                            child: Text('Rename'),
+                          ),
+                          PopupMenuItem<String>(
+                            value: 'delete',
+                            child: Text('Delete'),
+                          ),
+                        ];
+                      },
+                    )));
           },
         );
       },

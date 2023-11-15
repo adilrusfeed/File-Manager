@@ -67,7 +67,10 @@ class _VideoScreenState extends State<VideoScreen> {
                         openFile(file);
                       },
                       title: Text(file.fileName),
-                      leading: Icon(Icons.insert_drive_file),
+                      leading: Icon(
+                        Icons.video_camera_back_outlined,
+                        color: Colors.orange,
+                      ),
                     );
                   } else {
                     return Container();

@@ -23,12 +23,12 @@ class categoryContainer extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   color: Colors.amber,
-                  border: Border.all(
-                      color: Color.fromARGB(255, 227, 226, 226), width: 2),
+                  border:
+                      Border.all(color: Color.fromARGB(255, 0, 0, 0), width: 2),
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
                     image: AssetImage(imagePath),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
               ),

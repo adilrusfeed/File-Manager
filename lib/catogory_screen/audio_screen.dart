@@ -47,7 +47,10 @@ class AudioScreen extends StatelessWidget {
                         openFile(file);
                       },
                       title: Text(file.fileName),
-                      leading: Icon(Icons.insert_drive_file),
+                      leading: Icon(
+                        Icons.audiotrack,
+                        color: Colors.orange,
+                      ),
                     );
                   } else {
                     return Container();

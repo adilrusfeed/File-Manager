@@ -58,7 +58,10 @@ class _ImageScreenState extends State<ImageScreen> {
                       openFile(file);
                     },
                     title: Text(file.fileName),
-                    leading: Icon(Icons.insert_drive_file),
+                    leading: Icon(
+                      Icons.image,
+                      color: Colors.orange,
+                    ),
                   );
                 } else {
                   return Container(); // Filter out non-image files
