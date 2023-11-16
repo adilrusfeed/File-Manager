@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, avoid_print
+
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ Future<void> addFile(PlatformFile selectedFile) async {
   final fileDB = await Hive.openBox<FileModel>("FileModel_db");
   final file = FileModel(
     id: DateTime.now().millisecondsSinceEpoch,
-    fileName: selectedFile.name ?? '',
+    fileName: selectedFile.name,
     filePath: selectedFile.path ?? '',
   );
 
