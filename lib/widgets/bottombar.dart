@@ -23,22 +23,24 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: pages[myindex],
-        bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: Colors.white,
-            color: Color.fromARGB(255, 152, 154, 154),
-            animationDuration: Duration(milliseconds: 500),
-            onTap: (index) {
-              setState(() {
-                myindex = index;
-              });
-            },
-            items: [
-              Icon(Icons.home),
-              Icon(Icons.history),
-              Icon(Icons.add),
-              Icon(Icons.bar_chart_sharp),
-            ]));
+    return SafeArea(
+      child: Scaffold(
+          body: pages[myindex],
+          bottomNavigationBar: CurvedNavigationBar(
+              backgroundColor: Colors.white,
+              color: Color.fromARGB(255, 152, 154, 154),
+              animationDuration: Duration(milliseconds: 500),
+              onTap: (index) {
+                setState(() {
+                  myindex = index;
+                });
+              },
+              items: [
+                Icon(Icons.home),
+                Icon(Icons.history),
+                Icon(Icons.add),
+                Icon(Icons.bar_chart_sharp),
+              ])),
+    );
   }
 }
