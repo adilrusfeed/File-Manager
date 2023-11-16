@@ -2,7 +2,6 @@
 
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';
-
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
@@ -59,28 +58,31 @@ class _ImageScreenState extends State<ImageScreen> {
                 final file = sortedFiles[index];
 
                 if (isImageFile(file.fileName)) {
-                  return ListTile(
-                    onTap: () {
-                      openFile(file);
-                    },
-                    title: Text(file.fileName),
-                    leading: Icon(
-                      Icons.image,
-                      color: Colors.orange,
+                  return Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: ListTile(
+                      onTap: () {
+                        openFile(file);
+                      },
+                      title: Text(file.fileName),
+                      leading: Icon(
+                        Icons.image,
+                        color: Colors.orange,
+                      ),
+                      trailing: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  const Color.fromARGB(255, 255, 255, 255)),
+                              shape: MaterialStatePropertyAll(
+                                  CircleBorder(eccentricity: 0))),
+                          onPressed: () {
+                            _deleteDialog(file);
+                          },
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          )),
                     ),
-                    trailing: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                                const Color.fromARGB(255, 255, 255, 255)),
-                            shape: MaterialStatePropertyAll(
-                                CircleBorder(eccentricity: 0))),
-                        onPressed: () {
-                          _deleteDialog(file);
-                        },
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        )),
                   );
                 } else {
                   return Container();

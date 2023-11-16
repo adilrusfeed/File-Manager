@@ -67,28 +67,33 @@ class _VideoScreenState extends State<VideoScreen> {
                   final file = files[index];
 
                   if (isVideoFile(file.fileName)) {
-                    return ListTile(
-                      onTap: () {
-                        openFile(file);
-                      },
-                      title: Text(file.fileName),
-                      leading: Icon(
-                        Icons.video_camera_back_outlined,
-                        color: Colors.orange,
-                      ),
-                      trailing: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  const Color.fromARGB(255, 255, 255, 255)),
-                              shape: MaterialStatePropertyAll(
-                                  CircleBorder(eccentricity: 0))),
-                          onPressed: () {
-                            _deleteDialog(file);
+                    return Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: Container(
+                        child: ListTile(
+                          onTap: () {
+                            openFile(file);
                           },
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          )),
+                          title: Text(file.fileName),
+                          leading: Icon(
+                            Icons.video_camera_back_outlined,
+                            color: Colors.orange,
+                          ),
+                          trailing: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      const Color.fromARGB(255, 255, 255, 255)),
+                                  shape: MaterialStatePropertyAll(
+                                      CircleBorder(eccentricity: 0))),
+                              onPressed: () {
+                                _deleteDialog(file);
+                              },
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              )),
+                        ),
+                      ),
                     );
                   } else {
                     return Container();

@@ -39,41 +39,6 @@ class _AddScreenState extends State<AddScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (selectedFiles != null && selectedFiles!.isNotEmpty)
-                Column(children: [
-                  for (var file in selectedFiles!)
-                    GestureDetector(
-                      onTap: () {
-                        openFile(file);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Selected File:",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              file.name,
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                ]),
-              SizedBox(height: 20),
               InkWell(
                 onTap: () {
                   pickFiless();
@@ -132,7 +97,44 @@ class _AddScreenState extends State<AddScreen> {
                   }
                 },
                 label: Text("Save"),
-              )
+              ),
+              SizedBox(height: 10),
+              Divider(),
+              if (selectedFiles != null && selectedFiles!.isNotEmpty)
+                Column(children: [
+                  for (var file in selectedFiles!)
+                    GestureDetector(
+                      onTap: () {
+                        openFile(file);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Selected File:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              file.name,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ]),
+              SizedBox(height: 20),
             ],
           ),
         ),

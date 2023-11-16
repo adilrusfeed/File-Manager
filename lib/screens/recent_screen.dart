@@ -47,6 +47,8 @@ class _RecentScreenState extends State<RecentScreen> {
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
+
+          //-------------------------------------popup menu-----------------------------------
           actions: [
             PopupMenuButton<String>(
               onSelected: (choice) {
@@ -124,6 +126,7 @@ class _RecentScreenState extends State<RecentScreen> {
         ));
   }
 
+//-------------------------------------------listview-------------------------------------------
   Widget buildListView() {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
@@ -135,7 +138,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 : a.fileName.compareTo(b.fileName);
           });
         }
-        // Reverse the list (newly added item come top)
+
         files = files.reversed.toList();
 
         if (searchQuery.isNotEmpty) {
@@ -150,45 +153,48 @@ class _RecentScreenState extends State<RecentScreen> {
           itemCount: files.length,
           itemBuilder: (context, index) {
             final file = files[index];
-            return Container(
-                color: index % 2 == 0
-                    ? Color.fromARGB(255, 237, 236, 233)
-                    : Color.fromARGB(255, 235, 235, 214),
-                child: ListTile(
-                    onTap: () {
-                      openFile(file);
-                    },
-                    title: Text(file.fileName),
-                    leading: Icon(Icons.file_copy),
-                    trailing: PopupMenuButton<String>(
-                      onSelected: (choice) {
-                        if (choice == "rename") {
-                          setState(() {
-                            renameFile(file);
-                          });
-                        } else if (choice == "delete") {
-                          deleteFile(file);
-                        }
-                      },
-                      itemBuilder: (BuildContext context) {
-                        return [
-                          PopupMenuItem<String>(
-                            value: 'rename',
-                            child: Text('Rename'),
-                          ),
-                          PopupMenuItem<String>(
-                            value: 'delete',
-                            child: Text('Delete'),
-                          ),
-                        ];
-                      },
-                    )));
+            return Padding(
+                padding: EdgeInsets.symmetric(vertical: 1),
+                child: Container(
+                    color: index % 2 == 0
+                        ? Color.fromARGB(255, 235, 237, 137)
+                        : Color.fromARGB(255, 216, 216, 167),
+                    child: ListTile(
+                        onTap: () {
+                          openFile(file);
+                        },
+                        title: Text(file.fileName),
+                        leading: Icon(Icons.file_copy),
+                        trailing: PopupMenuButton<String>(
+                          onSelected: (choice) {
+                            if (choice == "rename") {
+                              setState(() {
+                                renameFile(file);
+                              });
+                            } else if (choice == "delete") {
+                              deleteFile(file);
+                            }
+                          },
+                          itemBuilder: (BuildContext context) {
+                            return [
+                              PopupMenuItem<String>(
+                                value: 'rename',
+                                child: Text('Rename'),
+                              ),
+                              PopupMenuItem<String>(
+                                value: 'delete',
+                                child: Text("Delete"),
+                              ),
+                            ];
+                          },
+                        ))));
           },
         );
       },
     );
   }
 
+//----------------------------gridview--------------------------
   Widget buildGridView() {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
@@ -261,6 +267,7 @@ class _RecentScreenState extends State<RecentScreen> {
     );
   }
 
+  //---------------------------rename method--------------------------
   void renameFile(FileModel file) async {
     TextEditingController textController = TextEditingController();
     String initialName = file.fileName.split('.').first;
@@ -284,7 +291,7 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             TextButton(
               child: Text("Rename"),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
                 String newName = textController.text;
                 if (newName.isNotEmpty) {
@@ -292,10 +299,11 @@ class _RecentScreenState extends State<RecentScreen> {
                       newName + "." + file.fileName.split('.').last;
 
                   file.fileName = newFileName;
-
-                  FileNotifier.value = FileNotifier.value
-                      .map((f) => f.id == file.id ? file : f)
-                      .toList();
+                  await renameFile1(
+                    FileNotifier.value
+                        .indexWhere((eachfile) => eachfile.id == file.id),
+                    file,
+                  );
                 }
               },
             )
