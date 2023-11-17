@@ -16,9 +16,9 @@ class _AudioScreenState extends State<AudioScreen> {
   bool _isAscending = true;
   bool isAudioFile(String fileName) {
     var audioExtension = [
-      '.mp3',
       '.wav',
       '.aac',
+      '.mp3',
       '.ogg',
       '.wma',
       '.flac',

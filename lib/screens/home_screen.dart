@@ -93,7 +93,13 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 1),
-          searchbar(),
+          InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => RecentScreen(),
+                ));
+              },
+              child: searchbar()),
           SizedBox(height: 1),
           Column(
             children: [
@@ -161,7 +167,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 height: 85,
-                width: 325,
+                width: 350,
                 decoration: BoxDecoration(
                   color: Color(0xFFF0ECEC),
                   border: Border.all(width: 2, color: Colors.grey[700]!),

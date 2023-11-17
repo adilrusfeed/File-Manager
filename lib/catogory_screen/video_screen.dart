@@ -50,57 +50,55 @@ class _VideoScreenState extends State<VideoScreen> {
               child: Text("sort")),
         ],
       ),
-      body: Container(
-        child: ValueListenableBuilder<List<FileModel>>(
-          valueListenable: FileNotifier,
-          builder: (context, files, child) {
-            List<FileModel> sortedFiles = List.from(files);
-            sortedFiles.sort((a, b) {
-              return _isAscending
-                  ? b.fileName.compareTo(a.fileName)
-                  : a.fileName.compareTo(b.fileName);
-            });
+      body: ValueListenableBuilder<List<FileModel>>(
+        valueListenable: FileNotifier,
+        builder: (context, files, child) {
+          List<FileModel> sortedFiles = List.from(files);
+          sortedFiles.sort((a, b) {
+            return _isAscending
+                ? b.fileName.compareTo(a.fileName)
+                : a.fileName.compareTo(b.fileName);
+          });
 
-            return ListView.builder(
-                itemCount: files.length,
-                itemBuilder: (context, index) {
-                  final file = files[index];
+          return ListView.builder(
+              itemCount: files.length,
+              itemBuilder: (context, index) {
+                final file = files[index];
 
-                  if (isVideoFile(file.fileName)) {
-                    return Padding(
-                      padding: const EdgeInsets.all(3),
-                      child: Container(
-                        child: ListTile(
-                          onTap: () {
-                            openFile(file);
-                          },
-                          title: Text(file.fileName),
-                          leading: Icon(
-                            Icons.video_camera_back_outlined,
-                            color: Colors.orange,
-                          ),
-                          trailing: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      const Color.fromARGB(255, 255, 255, 255)),
-                                  shape: MaterialStatePropertyAll(
-                                      CircleBorder(eccentricity: 0))),
-                              onPressed: () {
-                                _deleteDialog(file);
-                              },
-                              child: Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              )),
+                if (isVideoFile(file.fileName)) {
+                  return Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: Container(
+                      child: ListTile(
+                        onTap: () {
+                          openFile(file);
+                        },
+                        title: Text(file.fileName),
+                        leading: Icon(
+                          Icons.video_camera_back_outlined,
+                          color: Colors.orange,
                         ),
+                        trailing: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                    const Color.fromARGB(255, 255, 255, 255)),
+                                shape: MaterialStatePropertyAll(
+                                    CircleBorder(eccentricity: 0))),
+                            onPressed: () {
+                              _deleteDialog(file);
+                            },
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            )),
                       ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                });
-          },
-        ),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              });
+        },
       ),
     );
   }

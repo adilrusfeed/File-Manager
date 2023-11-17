@@ -41,56 +41,54 @@ class _ImageScreenState extends State<ImageScreen> {
               child: Text("sort")),
         ],
       ),
-      body: Container(
-        child: ValueListenableBuilder<List<FileModel>>(
-          valueListenable: FileNotifier,
-          builder: (context, files, child) {
-            List<FileModel> sortedFiles = List.from(files);
-            sortedFiles.sort((a, b) {
-              return _isAscending
-                  ? b.fileName.compareTo(a.fileName)
-                  : a.fileName.compareTo(b.fileName);
-            });
+      body: ValueListenableBuilder<List<FileModel>>(
+        valueListenable: FileNotifier,
+        builder: (context, files, child) {
+          List<FileModel> sortedFiles = List.from(files);
+          sortedFiles.sort((a, b) {
+            return _isAscending
+                ? b.fileName.compareTo(a.fileName)
+                : a.fileName.compareTo(b.fileName);
+          });
 
-            return ListView.builder(
-              itemCount: sortedFiles.length,
-              itemBuilder: (context, index) {
-                final file = sortedFiles[index];
+          return ListView.builder(
+            itemCount: sortedFiles.length,
+            itemBuilder: (context, index) {
+              final file = sortedFiles[index];
 
-                if (isImageFile(file.fileName)) {
-                  return Padding(
-                    padding: const EdgeInsets.all(3),
-                    child: ListTile(
-                      onTap: () {
-                        openFile(file);
-                      },
-                      title: Text(file.fileName),
-                      leading: Icon(
-                        Icons.image,
-                        color: Colors.orange,
-                      ),
-                      trailing: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  const Color.fromARGB(255, 255, 255, 255)),
-                              shape: MaterialStatePropertyAll(
-                                  CircleBorder(eccentricity: 0))),
-                          onPressed: () {
-                            _deleteDialog(file);
-                          },
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          )),
+              if (isImageFile(file.fileName)) {
+                return Padding(
+                  padding: const EdgeInsets.all(3),
+                  child: ListTile(
+                    onTap: () {
+                      openFile(file);
+                    },
+                    title: Text(file.fileName),
+                    leading: Icon(
+                      Icons.image,
+                      color: Colors.orange,
                     ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            );
-          },
-        ),
+                    trailing: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                const Color.fromARGB(255, 255, 255, 255)),
+                            shape: MaterialStatePropertyAll(
+                                CircleBorder(eccentricity: 0))),
+                        onPressed: () {
+                          _deleteDialog(file);
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        )),
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
+          );
+        },
       ),
     );
   }
