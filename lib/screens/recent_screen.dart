@@ -35,6 +35,7 @@ class _RecentScreenState extends State<RecentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actionsIconTheme: IconThemeData(color: Colors.black),
           elevation: 0,
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: Text(

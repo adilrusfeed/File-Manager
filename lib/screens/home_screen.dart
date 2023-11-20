@@ -10,7 +10,7 @@ import 'package:file_manager/setting_page/terms.dart';
 import 'package:file_manager/widgets/category.dart';
 import 'package:file_manager/widgets/drawer.dart';
 import 'package:file_manager/setting_page/reset.dart';
-import 'package:file_manager/widgets/search.dart';
+import 'package:file_manager/widgets/containersearch.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -91,13 +91,13 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 1),
-          InkWell(
+          GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => RecentScreen(),
                 ));
               },
-              child: searchbar()),
+              child: searchcontainer()),
           SizedBox(height: 1),
           Column(
             children: [
@@ -169,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 223, 219, 219),
                   border: Border.all(
-                      width: 2, color: const Color.fromARGB(255, 0, 0, 0)!),
+                      width: 2, color: const Color.fromARGB(255, 0, 0, 0)),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Padding(

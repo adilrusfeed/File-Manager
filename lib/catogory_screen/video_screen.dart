@@ -13,6 +13,9 @@ class VideoScreen extends StatefulWidget {
 }
 
 class _VideoScreenState extends State<VideoScreen> {
+  TextEditingController searchController3 = TextEditingController();
+  String searchQuery = "";
+
   bool _isAscending = true;
 
   bool isVideoFile(String fileName) {
@@ -28,6 +31,12 @@ class _VideoScreenState extends State<VideoScreen> {
     ];
     var extension = path.extension(fileName).toLowerCase();
     return videoExtension.contains(extension);
+  }
+
+  void onSearchTextChanged(String query) {
+    setState(() {
+      searchQuery = query;
+    });
   }
 
   @override
@@ -50,58 +59,95 @@ class _VideoScreenState extends State<VideoScreen> {
               child: Text("sort")),
         ],
       ),
-      body: ValueListenableBuilder<List<FileModel>>(
-        valueListenable: FileNotifier,
-        builder: (context, files, child) {
-          List<FileModel> sortedFiles = List.from(files);
-          sortedFiles.sort((a, b) {
-            return _isAscending
-                ? b.fileName.compareTo(a.fileName)
-                : a.fileName.compareTo(b.fileName);
-          });
+      body: Column(
+        children: [
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: searchController3,
+              onChanged: onSearchTextChanged,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 240, 236, 236),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  hintText: 'Search Files',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 192, 187, 187),
+                      fontWeight: FontWeight.w500),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  )),
+            ),
+          ),
+          Expanded(
+            child: ValueListenableBuilder<List<FileModel>>(
+              valueListenable: FileNotifier,
+              builder: (context, files, child) {
+                List<FileModel> sortedFiles = List.from(files);
+                sortedFiles.sort((a, b) {
+                  return _isAscending
+                      ? b.fileName.compareTo(a.fileName)
+                      : a.fileName.compareTo(b.fileName);
+                });
 
-          return ListView.builder(
-              itemCount: files.length,
-              itemBuilder: (context, index) {
-                final file = files[index];
-
-                if (isVideoFile(file.fileName)) {
-                  return Padding(
-                    padding: const EdgeInsets.all(3),
-                    child: Container(
-                      child: ListTile(
-                        onTap: () {
-                          openFile(file);
-                        },
-                        title: Text(
-                          file.fileName,
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                        leading: Icon(
-                          Icons.video_camera_back_outlined,
-                          color: Colors.orange,
-                        ),
-                        trailing: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll(
-                                    const Color.fromARGB(255, 255, 255, 255)),
-                                shape: MaterialStatePropertyAll(
-                                    CircleBorder(eccentricity: 0))),
-                            onPressed: () {
-                              _deleteDialog(file);
-                            },
-                            child: Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                            )),
-                      ),
-                    ),
-                  );
-                } else {
-                  return Container();
+                if (searchQuery.isNotEmpty) {
+                  sortedFiles = sortedFiles
+                      .where((file) => file.fileName
+                          .toLowerCase()
+                          .contains(searchQuery.toLowerCase()))
+                      .toList();
                 }
-              });
-        },
+
+                return ListView.builder(
+                    itemCount: files.length,
+                    itemBuilder: (context, index) {
+                      final file = files[index];
+
+                      if (isVideoFile(file.fileName)) {
+                        return Padding(
+                          padding: const EdgeInsets.all(3),
+                          child: Container(
+                            child: ListTile(
+                              onTap: () {
+                                openFile(file);
+                              },
+                              title: Text(
+                                file.fileName,
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              ),
+                              leading: Icon(
+                                Icons.video_camera_back_outlined,
+                                color: Colors.orange,
+                              ),
+                              trailing: ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor: MaterialStatePropertyAll(
+                                          const Color.fromARGB(
+                                              255, 255, 255, 255)),
+                                      shape: MaterialStatePropertyAll(
+                                          CircleBorder(eccentricity: 0))),
+                                  onPressed: () {
+                                    _deleteDialog(file);
+                                  },
+                                  child: Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  )),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    });
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
