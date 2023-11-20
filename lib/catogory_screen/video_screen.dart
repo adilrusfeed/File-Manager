@@ -34,13 +34,13 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown,
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 0, 0, 0)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         title: Text("videos"),
         actions: [
           ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.brown),
+                backgroundColor: MaterialStatePropertyAll(
+                    const Color.fromARGB(255, 0, 0, 0)),
               ),
               onPressed: () {
                 setState(() {
@@ -73,7 +73,10 @@ class _VideoScreenState extends State<VideoScreen> {
                         onTap: () {
                           openFile(file);
                         },
-                        title: Text(file.fileName),
+                        title: Text(
+                          file.fileName,
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
                         leading: Icon(
                           Icons.video_camera_back_outlined,
                           color: Colors.orange,

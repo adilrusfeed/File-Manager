@@ -33,10 +33,6 @@ class ChartScreen extends StatelessWidget {
           "here you can know how many files you added ",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(
-          height: 30,
-        ),
-        Image.asset("assets/images/Screenshot 2023-11-14 112058.png")
       ]),
     );
   }

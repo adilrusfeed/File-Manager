@@ -25,13 +25,13 @@ class _ImageScreenState extends State<ImageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown,
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 0, 0, 0)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         title: Text('Images'),
         actions: [
           ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.brown),
+                backgroundColor: MaterialStatePropertyAll(
+                    const Color.fromARGB(255, 0, 0, 0)),
               ),
               onPressed: () {
                 setState(() {
@@ -63,7 +63,10 @@ class _ImageScreenState extends State<ImageScreen> {
                     onTap: () {
                       openFile(file);
                     },
-                    title: Text(file.fileName),
+                    title: Text(
+                      file.fileName,
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
                     leading: Icon(
                       Icons.image,
                       color: Colors.orange,

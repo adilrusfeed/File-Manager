@@ -33,13 +33,13 @@ class _DocumentScreenState extends State<DocumentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown,
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 0, 0, 0)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         title: Text("documents"),
         actions: [
           ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.brown),
+                backgroundColor: MaterialStatePropertyAll(
+                    const Color.fromARGB(255, 0, 0, 0)),
               ),
               onPressed: () {
                 setState(() {
@@ -65,7 +65,10 @@ class _DocumentScreenState extends State<DocumentScreen> {
                       onTap: () {
                         openFile(file);
                       },
-                      title: Text(file.fileName),
+                      title: Text(
+                        file.fileName,
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
                       leading: Icon(
                         Icons.edit_document,
                         color: Colors.orange,

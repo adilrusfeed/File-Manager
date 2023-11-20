@@ -28,7 +28,7 @@ class _BottomBarState extends State<BottomBar> {
           body: pages[myindex],
           bottomNavigationBar: CurvedNavigationBar(
               backgroundColor: Colors.white,
-              color: Color.fromARGB(255, 152, 154, 154),
+              color: Color.fromARGB(255, 0, 0, 0),
               animationDuration: Duration(milliseconds: 500),
               onTap: (index) {
                 setState(() {
@@ -36,10 +36,13 @@ class _BottomBarState extends State<BottomBar> {
                 });
               },
               items: [
-                Icon(Icons.home),
-                Icon(Icons.history),
-                Icon(Icons.add),
-                Icon(Icons.bar_chart_sharp),
+                Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
+                Icon(Icons.history, color: Colors.white),
+                Icon(Icons.add, color: Colors.white),
+                Icon(Icons.bar_chart_sharp, color: Colors.white),
               ])),
     );
   }

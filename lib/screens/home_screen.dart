@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
-
 import 'package:file_manager/catogory_screen/audio_screen.dart';
 import 'package:file_manager/catogory_screen/document_screen.dart';
 import 'package:file_manager/catogory_screen/image_screen.dart';
@@ -9,7 +8,6 @@ import 'package:file_manager/setting_page/about.dart';
 import 'package:file_manager/setting_page/exit.dart';
 import 'package:file_manager/setting_page/terms.dart';
 import 'package:file_manager/widgets/category.dart';
-
 import 'package:file_manager/widgets/drawer.dart';
 import 'package:file_manager/setting_page/reset.dart';
 import 'package:file_manager/widgets/search.dart';
@@ -169,8 +167,9 @@ class HomeScreen extends StatelessWidget {
                 height: 85,
                 width: 350,
                 decoration: BoxDecoration(
-                  color: Color(0xFFF0ECEC),
-                  border: Border.all(width: 2, color: Colors.grey[700]!),
+                  color: Color.fromARGB(255, 223, 219, 219),
+                  border: Border.all(
+                      width: 2, color: const Color.fromARGB(255, 0, 0, 0)!),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Padding(

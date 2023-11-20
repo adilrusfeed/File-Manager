@@ -115,7 +115,8 @@ class _RecentScreenState extends State<RecentScreen> {
                         color: Color.fromARGB(255, 192, 187, 187),
                         fontWeight: FontWeight.w500),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                      borderRadius: BorderRadius.circular(30),
+                    )),
               ),
             ),
             Divider(),
