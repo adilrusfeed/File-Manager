@@ -66,7 +66,7 @@ class _ImageScreenState extends State<ImageScreen> {
                   ),
                   hintText: 'Search Files',
                   hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 192, 187, 187),
+                      color: Color.fromARGB(255, 240, 236, 236),
                       fontWeight: FontWeight.w500),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),

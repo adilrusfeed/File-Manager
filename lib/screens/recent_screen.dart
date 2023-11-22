@@ -14,8 +14,8 @@ class RecentScreen extends StatefulWidget {
 class _RecentScreenState extends State<RecentScreen> {
   TextEditingController searchController = TextEditingController();
 
-  // -------------Default view mode is ListView --------------------------
-  bool isGridView = false;
+  // -------------Default view mode is gridView --------------------------
+  bool isListView = false;
   bool isSorted = false;
   String searchQuery = "";
 
@@ -55,9 +55,9 @@ class _RecentScreenState extends State<RecentScreen> {
               onSelected: (choice) {
                 setState(() {
                   if (choice == 'gridView') {
-                    isGridView = true;
+                    isListView = false;
                   } else if (choice == 'listView') {
-                    isGridView = false;
+                    isListView = true;
                   } else if (choice == 'sort') {
                     isSorted = !isSorted;
                   }
@@ -122,7 +122,7 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             Divider(),
             Expanded(
-              child: isGridView ? buildGridView() : buildListView(),
+              child: isListView ? buildListView() : buildGridView(),
             )
           ],
         ));
@@ -156,17 +156,24 @@ class _RecentScreenState extends State<RecentScreen> {
           itemBuilder: (context, index) {
             final file = files[index];
             return Padding(
-                padding: EdgeInsets.symmetric(vertical: 1),
+                padding: EdgeInsets.symmetric(vertical: 2),
                 child: Container(
-                    color: index % 2 == 0
-                        ? Color.fromARGB(255, 235, 237, 137)
-                        : Color.fromARGB(255, 216, 216, 167),
+                    height: 60,
+                    // color: index % 2 == 0
+                    //     ? Color.fromARGB(255, 193, 174, 174)
+                    //     : Color.fromARGB(255, 153, 147, 137),
                     child: ListTile(
                         onTap: () {
                           openFile(file);
                         },
-                        title: Text(file.fileName),
-                        leading: Icon(Icons.file_copy),
+                        title: Text(
+                          file.fileName,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        leading: Icon(
+                          Icons.file_copy,
+                          color: Colors.black,
+                        ),
                         trailing: PopupMenuButton<String>(
                           onSelected: (choice) {
                             if (choice == "rename") {
@@ -174,7 +181,7 @@ class _RecentScreenState extends State<RecentScreen> {
                                 renameFile(file);
                               });
                             } else if (choice == "delete") {
-                              deleteFile(file);
+                              _deleteDialog(file);
                             }
                           },
                           itemBuilder: (BuildContext context) {
@@ -217,6 +224,8 @@ class _RecentScreenState extends State<RecentScreen> {
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            crossAxisSpacing: 5.0,
+            mainAxisSpacing: 5.0,
           ),
           itemCount: files.length,
           itemBuilder: (context, index) {
@@ -226,39 +235,52 @@ class _RecentScreenState extends State<RecentScreen> {
                 openFile(file);
               },
               child: Card(
+                elevation: 5.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
                 child: Stack(
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.file_copy_rounded),
-                        Text(file.fileName),
+                        Icon(
+                          Icons.file_copy_rounded,
+                          size: 30.0,
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          file.fileName,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 13.0),
+                        ),
                       ],
                     ),
                     Positioned(
-                        top: 0,
-                        right: 0,
-                        child: PopupMenuButton<String>(
-                          onSelected: (choice) {
-                            if (choice == "rename") {
-                              renameFile(file);
-                            } else if (choice == "delete") {
-                              deleteFile(file);
-                            }
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return [
-                              PopupMenuItem<String>(
-                                value: 'rename',
-                                child: Text('Rename'),
-                              ),
-                              PopupMenuItem<String>(
-                                value: 'delete',
-                                child: Text('Delete'),
-                              ),
-                            ];
-                          },
-                        )),
+                      top: 0,
+                      right: 0,
+                      child: PopupMenuButton<String>(
+                        onSelected: (choice) {
+                          if (choice == "rename") {
+                            renameFile(file);
+                          } else if (choice == "delete") {
+                            _deleteDialog(file);
+                          }
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return [
+                            PopupMenuItem<String>(
+                              value: 'rename',
+                              child: Text('Rename'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'delete',
+                              child: Text('Delete'),
+                            ),
+                          ];
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -309,6 +331,41 @@ class _RecentScreenState extends State<RecentScreen> {
                 }
               },
             )
+          ],
+        );
+      },
+    );
+  }
+
+  //---------------------------delete method--------------------------
+  Future<void> _deleteDialog(FileModel file) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Deletion'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to delete ${file.fileName}?',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                deleteFile(file);
+                Navigator.of(context).pop();
+              },
+              child: Text('Delete'),
+            ),
           ],
         );
       },

@@ -13,6 +13,8 @@ class DocumentScreen extends StatefulWidget {
 }
 
 class _DocumentScreenState extends State<DocumentScreen> {
+  TextEditingController searchcontroller = TextEditingController();
+  String searchQuery = "";
   bool _isAscending = true;
   bool isDocumentFile(String fileName) {
     var documentExtension = [
@@ -27,6 +29,12 @@ class _DocumentScreenState extends State<DocumentScreen> {
     ];
     var extension = path.extension(fileName).toLowerCase();
     return documentExtension.contains(extension);
+  }
+
+  void onSearchTextChanged(String query) {
+    setState(() {
+      searchQuery = query;
+    });
   }
 
   @override
@@ -49,50 +57,76 @@ class _DocumentScreenState extends State<DocumentScreen> {
               child: Text("sort")),
         ],
       ),
-      body: Container(
-        child: ValueListenableBuilder<List<FileModel>>(
-          valueListenable: FileNotifier,
-          builder: (context, files, child) {
-            files = files.reversed.toList();
+      body: Column(
+        children: [
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: searchcontroller,
+              onChanged: onSearchTextChanged,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 240, 236, 236),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  hintText: 'Search Files',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 240, 236, 236),
+                      fontWeight: FontWeight.w500),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  )),
+            ),
+          ),
+          Expanded(
+            child: ValueListenableBuilder<List<FileModel>>(
+              valueListenable: FileNotifier,
+              builder: (context, files, child) {
+                files = files.reversed.toList();
 
-            return ListView.builder(
-                itemCount: files.length,
-                itemBuilder: (context, index) {
-                  final file = files[index];
+                return ListView.builder(
+                    itemCount: files.length,
+                    itemBuilder: (context, index) {
+                      final file = files[index];
 
-                  if (isDocumentFile(file.fileName)) {
-                    return ListTile(
-                      onTap: () {
-                        openFile(file);
-                      },
-                      title: Text(
-                        file.fileName,
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      leading: Icon(
-                        Icons.edit_document,
-                        color: Colors.orange,
-                      ),
-                      trailing: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  const Color.fromARGB(255, 255, 255, 255)),
-                              shape: MaterialStatePropertyAll(
-                                  CircleBorder(eccentricity: 0))),
-                          onPressed: () {
-                            _deleteDialog(file);
+                      if (isDocumentFile(file.fileName)) {
+                        return ListTile(
+                          onTap: () {
+                            openFile(file);
                           },
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          )),
-                    );
-                  } else {
-                    return Container();
-                  }
-                });
-          },
-        ),
+                          title: Text(
+                            file.fileName,
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          leading: Icon(
+                            Icons.edit_document,
+                            color: Colors.orange,
+                          ),
+                          trailing: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      const Color.fromARGB(255, 255, 255, 255)),
+                                  shape: MaterialStatePropertyAll(
+                                      CircleBorder(eccentricity: 0))),
+                              onPressed: () {
+                                _deleteDialog(file);
+                              },
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              )),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    });
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
