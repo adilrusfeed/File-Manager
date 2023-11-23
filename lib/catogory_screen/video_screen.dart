@@ -19,7 +19,7 @@ class _VideoScreenState extends State<VideoScreen> {
   bool _isAscending = true;
 
   bool isVideoFile(String fileName) {
-    var videoExtension = [
+    var videoExtensions = [
       '.mkv',
       '.mp4',
       '.avi',
@@ -30,7 +30,7 @@ class _VideoScreenState extends State<VideoScreen> {
       '.webm'
     ];
     var extension = path.extension(fileName).toLowerCase();
-    return videoExtension.contains(extension);
+    return videoExtensions.contains(extension);
   }
 
   void onSearchTextChanged(String query) {
@@ -76,7 +76,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   ),
                   hintText: 'Search Files',
                   hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 192, 187, 187),
+                      color: Color.fromARGB(255, 151, 146, 146),
                       fontWeight: FontWeight.w500),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -103,9 +103,9 @@ class _VideoScreenState extends State<VideoScreen> {
                 }
 
                 return ListView.builder(
-                    itemCount: files.length,
+                    itemCount: sortedFiles.length,
                     itemBuilder: (context, index) {
-                      final file = files[index];
+                      final file = sortedFiles[index];
 
                       if (isVideoFile(file.fileName)) {
                         return Padding(

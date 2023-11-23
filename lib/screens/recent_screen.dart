@@ -106,7 +106,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 onChanged: onSearchTextChanged,
                 decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(255, 240, 236, 236),
+                    fillColor: Color.fromARGB(255, 243, 238, 238),
                     prefixIcon: Icon(
                       Icons.search,
                       color: Colors.black,
@@ -120,7 +120,7 @@ class _RecentScreenState extends State<RecentScreen> {
                     )),
               ),
             ),
-            Divider(),
+            Divider(color: const Color.fromARGB(255, 0, 0, 0), thickness: 1),
             Expanded(
               child: isListView ? buildListView() : buildGridView(),
             )

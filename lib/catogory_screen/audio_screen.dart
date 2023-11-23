@@ -13,21 +13,21 @@ class AudioScreen extends StatefulWidget {
 }
 
 class _AudioScreenState extends State<AudioScreen> {
-  TextEditingController searchcontroller = TextEditingController();
+  TextEditingController searchcontroller4 = TextEditingController();
   String searchQuery = "";
   bool _isAscending = true;
   bool isAudioFile(String fileName) {
-    var audioExtension = [
+    var audioExtensions = [
       '.wav',
       '.aac',
       '.mp3',
       '.ogg',
       '.wma',
       '.flac',
-      '.m4a',
+      '.m4a'
     ];
     var extension = path.extension(fileName).toLowerCase();
-    return audioExtension.contains(extension);
+    return audioExtensions.contains(extension);
   }
 
   void onSearchTextchanged(String query) {
@@ -62,7 +62,7 @@ class _AudioScreenState extends State<AudioScreen> {
           Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
-                  controller: searchcontroller,
+                  controller: searchcontroller4,
                   onChanged: onSearchTextchanged,
                   decoration: InputDecoration(
                       filled: true,
@@ -70,7 +70,7 @@ class _AudioScreenState extends State<AudioScreen> {
                       prefixIcon: Icon(Icons.search, color: Colors.black),
                       hintText: "search files",
                       hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 240, 236, 236),
+                          color: Color.fromARGB(255, 151, 146, 146),
                           fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30))))),
@@ -78,7 +78,19 @@ class _AudioScreenState extends State<AudioScreen> {
             child: ValueListenableBuilder<List<FileModel>>(
               valueListenable: FileNotifier,
               builder: (context, files, child) {
-                files = files.reversed.toList();
+                List<FileModel> sortedFiles = List.from(files);
+                sortedFiles.sort((a, b) {
+                  return _isAscending
+                      ? b.fileName.compareTo(a.fileName)
+                      : a.fileName.compareTo(b.fileName);
+                });
+                if (searchQuery.isNotEmpty) {
+                  sortedFiles = sortedFiles
+                      .where((file) => file.fileName
+                          .toLowerCase()
+                          .contains(searchQuery.toLowerCase()))
+                      .toList();
+                }
 
                 return ListView.builder(
                     itemCount: files.length,

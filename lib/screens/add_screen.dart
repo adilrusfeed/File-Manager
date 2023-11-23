@@ -76,23 +76,23 @@ class _AddScreenState extends State<AddScreen> {
                       selectedFiles = null;
                     });
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      duration: Duration(milliseconds: 200),
+                      duration: Duration(seconds: 1),
                       content: Text(
                         "Added Successfully",
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
-                      backgroundColor: Colors.white,
+                      backgroundColor: Color.fromARGB(255, 151, 225, 23),
                     ));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      duration: Duration(milliseconds: 200),
+                      duration: Duration(seconds: 1),
                       content: Text(
                         "Select a File",
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
-                      backgroundColor: Colors.white,
+                      backgroundColor: const Color.fromARGB(255, 219, 27, 27),
                     ));
                   }
                 },

@@ -13,11 +13,11 @@ class DocumentScreen extends StatefulWidget {
 }
 
 class _DocumentScreenState extends State<DocumentScreen> {
-  TextEditingController searchcontroller = TextEditingController();
+  TextEditingController searchcontroller5 = TextEditingController();
   String searchQuery = "";
   bool _isAscending = true;
   bool isDocumentFile(String fileName) {
-    var documentExtension = [
+    var documentExtensions = [
       '.pdf',
       '.doc',
       '.txt',
@@ -28,7 +28,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
       '.xls'
     ];
     var extension = path.extension(fileName).toLowerCase();
-    return documentExtension.contains(extension);
+    return documentExtensions.contains(extension);
   }
 
   void onSearchTextChanged(String query) {
@@ -63,7 +63,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              controller: searchcontroller,
+              controller: searchcontroller5,
               onChanged: onSearchTextChanged,
               decoration: InputDecoration(
                   filled: true,
@@ -74,7 +74,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
                   ),
                   hintText: 'Search Files',
                   hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 240, 236, 236),
+                      color: Color.fromARGB(255, 151, 146, 146),
                       fontWeight: FontWeight.w500),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -85,12 +85,25 @@ class _DocumentScreenState extends State<DocumentScreen> {
             child: ValueListenableBuilder<List<FileModel>>(
               valueListenable: FileNotifier,
               builder: (context, files, child) {
-                files = files.reversed.toList();
+                List<FileModel> sortedFiles = List.from(files);
+                sortedFiles.sort((a, b) {
+                  return _isAscending
+                      ? b.fileName.compareTo(a.fileName)
+                      : a.fileName.compareTo(b.fileName);
+                });
+
+                if (searchQuery.isNotEmpty) {
+                  sortedFiles = sortedFiles
+                      .where((file) => file.fileName
+                          .toLowerCase()
+                          .contains(searchQuery.toLowerCase()))
+                      .toList();
+                }
 
                 return ListView.builder(
-                    itemCount: files.length,
+                    itemCount: sortedFiles.length,
                     itemBuilder: (context, index) {
-                      final file = files[index];
+                      final file = sortedFiles[index];
 
                       if (isDocumentFile(file.fileName)) {
                         return ListTile(

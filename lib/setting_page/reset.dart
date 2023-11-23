@@ -19,7 +19,7 @@ Future<void> resetDB(
           style: TextStyle(color: Colors.white),
         ),
         content: const Text(
-          "Are you sure you want to reset all settings",
+          "Are you sure you want to reset app\nDelete all files!",
           style: TextStyle(color: Colors.white),
         ),
         actions: <Widget>[
