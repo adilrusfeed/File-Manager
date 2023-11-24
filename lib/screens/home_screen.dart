@@ -1,16 +1,13 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors
+
 import 'package:file_manager/catogory_screen/audio_screen.dart';
 import 'package:file_manager/catogory_screen/document_screen.dart';
 import 'package:file_manager/catogory_screen/image_screen.dart';
 import 'package:file_manager/catogory_screen/video_screen.dart';
 import 'package:file_manager/screens/recent_screen.dart';
-import 'package:file_manager/setting_page/about.dart';
-import 'package:file_manager/setting_page/exit.dart';
-import 'package:file_manager/setting_page/terms.dart';
 import 'package:file_manager/widgets/category.dart';
-import 'package:file_manager/widgets/drawer.dart';
-import 'package:file_manager/setting_page/reset.dart';
 import 'package:file_manager/widgets/containersearch.dart';
+import 'package:file_manager/widgets/drawerpage.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,11 +20,12 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: Text(
-          'FILE MANAGER',
+          'EXPLORER',
           style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-              color: Color.fromARGB(255, 0, 0, 0)),
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
         ),
         centerTitle: true,
         iconTheme: IconThemeData(color: Color.fromARGB(255, 0, 0, 0)),
@@ -37,67 +35,38 @@ class HomeScreen extends StatelessWidget {
         shadowColor: const Color.fromARGB(255, 227, 227, 226),
         child: Container(
           color: Color(0xFFFFFFFF),
-          child: ListView(children: [
-            ListTile(
-              title: Center(
-                child: Text("Settings",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "settings",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 150),
-            GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AboutScreen(),
-                  ));
-                },
-                child: DrawerItem(text: "about", icon: Icons.info)),
-            Divider(),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TermsScreen(),
-                ));
-              },
-              child: DrawerItem(
-                  text: "terms and conditions",
-                  icon: Icons.document_scanner_rounded),
-            ),
-            Divider(),
-            GestureDetector(
-                onTap: () {
-                  resetDB(context);
-                },
-                child: DrawerItem(
-                    text: "reset", icon: Icons.restore_from_trash_outlined)),
-            Divider(),
-            GestureDetector(
-                onTap: () {
-                  exitpopup(context);
-                },
-                child: DrawerItem(text: "exit", icon: Icons.exit_to_app)),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.only(top: 50, left: 60),
-              child: Text(
-                "             version : 1.0.1",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            )
-          ]),
+              Expanded(child: DrawerHeaderWidget()),
+            ],
+          ),
         ),
       ),
       body: Column(
         children: [
           SizedBox(height: 1),
           GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RecentScreen(),
-                ));
-              },
-              child: searchcontainer()),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => RecentScreen(),
+              ));
+            },
+            child: searchcontainer(),
+          ),
           SizedBox(height: 1),
           Column(
             children: [
@@ -114,8 +83,9 @@ class HomeScreen extends StatelessWidget {
                           ));
                         },
                         child: categoryContainer(
-                            imagePath: "assets/images/image.png",
-                            containerText: "images"),
+                          imagePath: "assets/images/image.png",
+                          containerText: "images",
+                        ),
                       ),
                       SizedBox(
                         width: 10,
@@ -169,7 +139,9 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 223, 219, 219),
                   border: Border.all(
-                      width: 2, color: const Color.fromARGB(255, 0, 0, 0)),
+                    width: 2,
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                  ),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Padding(
@@ -180,7 +152,9 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         "10 GB / 64 GB",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                       Text("used storage"),
                     ],
@@ -195,8 +169,10 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: Text(
                       "Recent Files",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   Padding(

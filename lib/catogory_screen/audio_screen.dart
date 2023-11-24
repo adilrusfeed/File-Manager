@@ -93,9 +93,9 @@ class _AudioScreenState extends State<AudioScreen> {
                 }
 
                 return ListView.builder(
-                    itemCount: files.length,
+                    itemCount: sortedFiles.length,
                     itemBuilder: (context, index) {
-                      final file = files[index];
+                      final file = sortedFiles[index];
 
                       if (isAudioFile(file.fileName)) {
                         return ListTile(

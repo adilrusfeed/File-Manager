@@ -58,16 +58,16 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: 15),
                     Text(
-                        ' => File Categorization:Organize your files into distinct categories such as images, videos, audios, and documents for easy access.',
+                        '# File Categorization:Organize your files into distinct categories such as images, videos, audios, and documents for easy access.',
                         style: TextStyle(fontSize: 18)),
                     Text(
-                        ' => Secure Data: Your privacy is our priority. We use the powerful Hive database to ensure the security of your data.',
+                        '# Secure Data: Your privacy is our priority. We use the powerful Hive database to ensure the security of your data.',
                         style: TextStyle(fontSize: 18)),
                     Text(
-                        ' => Search Functionality: Quickly locate your files with our robust search feature.',
+                        '# Search Functionality: Quickly locate your files with our robust search feature.',
                         style: TextStyle(fontSize: 18)),
                     Text(
-                        ' => Storage Management: Keep track of your storage usage to ensure you never run out of space.',
+                        '# Storage Management: Keep track of your storage usage to ensure you never run out of space.',
                         style: TextStyle(fontSize: 18)),
                   ],
                 ),
