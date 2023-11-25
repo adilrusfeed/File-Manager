@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'package:file_manager/catogory_screen/audio_screen.dart';
 import 'package:file_manager/catogory_screen/document_screen.dart';
 import 'package:file_manager/catogory_screen/image_screen.dart';
 import 'package:file_manager/catogory_screen/video_screen.dart';
+import 'package:file_manager/db/function.dart';
+import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/screens/recent_screen.dart';
 import 'package:file_manager/widgets/category.dart';
 import 'package:file_manager/widgets/containersearch.dart';
@@ -56,128 +58,127 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 1),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => RecentScreen(),
-              ));
-            },
-            child: searchcontainer(),
-          ),
-          SizedBox(height: 1),
-          Column(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, bottom: 30),
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ImageScreen(),
-                          ));
-                        },
-                        child: categoryContainer(
-                          imagePath: "assets/images/image.png",
-                          containerText: "images",
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 1),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => RecentScreen(),
+                ));
+              },
+              child: searchcontainer(),
+            ),
+            SizedBox(height: 1),
+            Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 30),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ImageScreen(),
+                            ));
+                          },
+                          child: categoryContainer(
+                            imagePath: "assets/images/image.png",
+                            containerText: "images",
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => VideoScreen(),
-                          ));
-                        },
-                        child: categoryContainer(
-                          imagePath: "assets/images/video.png",
-                          containerText: "videos",
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AudioScreen(),
-                          ));
-                        },
-                        child: categoryContainer(
-                          imagePath: "assets/images/music.png",
-                          containerText: "audio",
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => VideoScreen(),
+                            ));
+                          },
+                          child: categoryContainer(
+                            imagePath: "assets/images/video.png",
+                            containerText: "videos",
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DocumentScreen(),
-                          ));
-                        },
-                        child: categoryContainer(
-                          imagePath: "assets/images/document.png",
-                          containerText: "documents",
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                height: 85,
-                width: 350,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 223, 219, 219),
-                  border: Border.all(
-                    width: 2,
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(22.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "10 GB / 64 GB",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AudioScreen(),
+                            ));
+                          },
+                          child: categoryContainer(
+                            imagePath: "assets/images/music.png",
+                            containerText: "audio",
+                          ),
                         ),
-                      ),
-                      Text("used storage"),
-                    ],
-                  ),
-                ),
-              ),
-              Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                    child: Text(
-                      "Recent Files",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DocumentScreen(),
+                            ));
+                          },
+                          child: categoryContainer(
+                            imagePath: "assets/images/document.png",
+                            containerText: "documents",
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: TextButton(
+                ),
+                Container(
+                  height: 85,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 223, 219, 219),
+                    border: Border.all(
+                      width: 2,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(22.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "10 GB / 64 GB",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text("used storage"),
+                      ],
+                    ),
+                  ),
+                ),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      child: Text(
+                        "Recent Files",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => RecentScreen(),
@@ -188,12 +189,44 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.black),
                       ),
                     ),
+                  ],
+                ),
+              ],
+            ),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  ValueListenableBuilder<List<FileModel>>(
+                    valueListenable: FileNotifier,
+                    builder: (context, recentFiles, child) {
+                      final limitedFiles = recentFiles.take(5).toList();
+                      return Column(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true, // Add this line
+                            itemCount: limitedFiles.length,
+                            itemBuilder: (context, index) => Card(
+                              elevation: 3,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  color: const Color.fromARGB(187, 255, 193, 7),
+                                ),
+                                child: ListTile(
+                                  title: Text(limitedFiles[index].fileName),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
-            ],
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

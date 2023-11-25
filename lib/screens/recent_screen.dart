@@ -235,7 +235,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 openFile(file);
               },
               child: Card(
-                elevation: 5.0,
+                elevation: 7.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),

@@ -1,38 +1,52 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ChartScreen extends StatelessWidget {
-  const ChartScreen({super.key});
+  // final int soldQuantity;
+  // final int openingStockQuantity;
+
+  // ChartScreen({
+  //   required this.soldQuantity,
+  //   required this.openingStockQuantity,
+  // });
 
   @override
   Widget build(BuildContext context) {
-    return SfCircularChart(
-        title: ChartTitle(text: 'Sales by sales person'),
-        legend: const Legend(isVisible: true),
-        series: <PieSeries<_PieData, String>>[
-          PieSeries<_PieData, String>(
-              explode: true,
-              explodeIndex: 0,
-              dataSource: pieData,
-              xValueMapper: (_PieData data, z_) => data.xData,
-              yValueMapper: (_PieData data, _) => data.yData,
-              dataLabelMapper: (_PieData data, _) => data.text,
-              dataLabelSettings: const DataLabelSettings(isVisible: true)),
-        ]);
+    // int totalQuantity = openingStockQuantity + soldQuantity;
+    // double openingStockPercentage =
+    //     (openingStockQuantity / totalQuantity) * 100;
+    // double soldPercentage = (soldQuantity / totalQuantity) * 100;
+
+    return AspectRatio(
+      aspectRatio: 1,
+      child: PieChart(
+        PieChartData(
+          sections: [
+            PieChartSectionData(
+              // value: openingStockPercentage,
+              color: const Color.fromARGB(255, 255, 110, 110),
+              // title:
+              //     'Sold Stock: ${openingStockPercentage.toStringAsFixed(2)}%',
+              titleStyle: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+              radius: 150,
+            ),
+            PieChartSectionData(
+              // value: soldPercentage,
+              color: const Color.fromARGB(255, 47, 0, 255),
+              // title: 'Available Stock: ${soldPercentage.toStringAsFixed(2)}%',
+              titleStyle: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+              radius: 150,
+            ),
+          ],
+          centerSpaceRadius: 0,
+          sectionsSpace: 0,
+          borderData: FlBorderData(
+            show: false,
+          ),
+        ),
+      ),
+    );
   }
 }
-
-class _PieData {
-  _PieData(this.xData, this.yData, this.text);
-
-  final String xData;
-  final num yData;
-  final String text;
-}
-
-final List<_PieData> pieData = [
-  _PieData('Images', 30, '30%'),
-  _PieData('Videos', 20, '20%'),
-  _PieData('Audios', 15, '15%'),
-  _PieData('Documents', 10, '10%'),
-];

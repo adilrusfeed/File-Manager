@@ -82,7 +82,7 @@ class _AddScreenState extends State<AddScreen> {
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
-                      backgroundColor: Color.fromARGB(255, 151, 225, 23),
+                      backgroundColor: Colors.green,
                     ));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
