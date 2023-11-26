@@ -137,12 +137,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 85,
+                  height: 76,
                   width: 350,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 223, 219, 219),
                     border: Border.all(
-                      width: 2,
+                      width: 1,
                       color: const Color.fromARGB(255, 0, 0, 0),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -153,13 +153,13 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "10 GB / 64 GB",
+                          "10  / 100",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 12,
                           ),
                         ),
-                        Text("used storage"),
+                        Text("files added"),
                       ],
                     ),
                   ),
@@ -206,14 +206,21 @@ class HomeScreen extends StatelessWidget {
                             shrinkWrap: true, // Add this line
                             itemCount: limitedFiles.length,
                             itemBuilder: (context, index) => Card(
-                              elevation: 3,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  color: const Color.fromARGB(187, 255, 193, 7),
-                                ),
-                                child: ListTile(
-                                  title: Text(limitedFiles[index].fileName),
+                              elevation: 4,
+                              child: GestureDetector(
+                                onTap: () {
+                                  openFile(limitedFiles[index]);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    border: Border.all(),
+                                    color: Color.fromARGB(208, 255, 147, 7),
+                                  ),
+                                  child: ListTile(
+                                    title: Text(limitedFiles[index].fileName),
+                                  ),
                                 ),
                               ),
                             ),
