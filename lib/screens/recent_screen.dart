@@ -159,9 +159,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 padding: EdgeInsets.symmetric(vertical: 2),
                 child: Container(
                     height: 60,
-                    // color: index % 2 == 0
-                    //     ? Color.fromARGB(255, 193, 174, 174)
-                    //     : Color.fromARGB(255, 153, 147, 137),
+                    color: Color.fromARGB(118, 255, 147, 7),
                     child: ListTile(
                         onTap: () {
                           openFile(file);
@@ -174,29 +172,7 @@ class _RecentScreenState extends State<RecentScreen> {
                           Icons.file_copy,
                           color: Colors.black,
                         ),
-                        trailing: PopupMenuButton<String>(
-                          onSelected: (choice) {
-                            if (choice == "rename") {
-                              setState(() {
-                                renameFile(file);
-                              });
-                            } else if (choice == "delete") {
-                              _deleteDialog(file);
-                            }
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return [
-                              PopupMenuItem<String>(
-                                value: 'rename',
-                                child: Text('Rename'),
-                              ),
-                              PopupMenuItem<String>(
-                                value: 'delete',
-                                child: Text("Delete"),
-                              ),
-                            ];
-                          },
-                        ))));
+                        trailing: popupmenu(file))));
           },
         );
       },
@@ -208,18 +184,7 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
-        if (isSorted) {
-          files.sort((a, b) => b.fileName.compareTo(a.fileName));
-        }
-        files = files.reversed.toList(); // Reverse the list
-
-        if (searchQuery.isNotEmpty) {
-          files = files
-              .where((file) => file.fileName
-                  .toLowerCase()
-                  .contains(searchQuery.toLowerCase()))
-              .toList();
-        }
+        files = soring_searching(files);
 
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -235,6 +200,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 openFile(file);
               },
               child: Card(
+                color: Color.fromARGB(171, 255, 147, 7),
                 elevation: 7.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -259,27 +225,7 @@ class _RecentScreenState extends State<RecentScreen> {
                     Positioned(
                       top: 0,
                       right: 0,
-                      child: PopupMenuButton<String>(
-                        onSelected: (choice) {
-                          if (choice == "rename") {
-                            renameFile(file);
-                          } else if (choice == "delete") {
-                            _deleteDialog(file);
-                          }
-                        },
-                        itemBuilder: (BuildContext context) {
-                          return [
-                            PopupMenuItem<String>(
-                              value: 'rename',
-                              child: Text('Rename'),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'delete',
-                              child: Text('Delete'),
-                            ),
-                          ];
-                        },
-                      ),
+                      child: popupmenu(file),
                     ),
                   ],
                 ),
@@ -289,6 +235,21 @@ class _RecentScreenState extends State<RecentScreen> {
         );
       },
     );
+  }
+
+  List<FileModel> soring_searching(List<FileModel> files) {
+    if (isSorted) {
+      files.sort((a, b) => b.fileName.compareTo(a.fileName));
+    }
+    files = files.reversed.toList(); // Reverse the list
+
+    if (searchQuery.isNotEmpty) {
+      files = files
+          .where((file) =>
+              file.fileName.toLowerCase().contains(searchQuery.toLowerCase()))
+          .toList();
+    }
+    return files;
   }
 
   //---------------------------rename method--------------------------
@@ -333,6 +294,32 @@ class _RecentScreenState extends State<RecentScreen> {
             )
           ],
         );
+      },
+    );
+  }
+
+  //--------------------popupmenu-----------------------------
+
+  PopupMenuButton<String> popupmenu(FileModel file) {
+    return PopupMenuButton<String>(
+      onSelected: (choice) {
+        if (choice == "rename") {
+          renameFile(file);
+        } else if (choice == "delete") {
+          _deleteDialog(file);
+        }
+      },
+      itemBuilder: (BuildContext context) {
+        return [
+          PopupMenuItem<String>(
+            value: 'rename',
+            child: Text('Rename'),
+          ),
+          PopupMenuItem<String>(
+            value: 'delete',
+            child: Text("Delete"),
+          ),
+        ];
       },
     );
   }

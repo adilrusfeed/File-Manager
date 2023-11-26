@@ -39,10 +39,23 @@ class _BottomBarState extends State<BottomBar> {
                 Icon(
                   Icons.home,
                   color: Colors.white,
+                  size: 30,
                 ),
-                Icon(Icons.history, color: Colors.white),
-                Icon(Icons.add, color: Colors.white),
-                Icon(Icons.bar_chart_sharp, color: Colors.white),
+                Icon(
+                  Icons.history,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                Icon(
+                  Icons.bar_chart_sharp,
+                  color: Colors.white,
+                  size: 30,
+                ),
               ])),
     );
   }
