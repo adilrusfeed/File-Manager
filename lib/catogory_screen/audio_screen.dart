@@ -24,7 +24,8 @@ class _AudioScreenState extends State<AudioScreen> {
       '.ogg',
       '.wma',
       '.flac',
-      '.m4a'
+      '.m4a',
+      '.opus'
     ];
     var extension = path.extension(fileName).toLowerCase();
     return audioExtensions.contains(extension);

@@ -142,12 +142,12 @@ class HomeScreen extends StatelessWidget {
 
               //--------------------------container(addes files)--------------------------
               Container(
-                height: 76,
+                height: 80,
                 width: 350,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 223, 219, 219),
                   border: Border.all(
-                    width: 1,
+                    width: 2,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -161,17 +161,12 @@ class HomeScreen extends StatelessWidget {
                         "10  / 100",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 12,
                         ),
                       ),
                       Text("files added"),
                     ],
                   ),
                 ),
-              ),
-              Divider(
-                thickness: 1,
-                color: Colors.black,
               ),
 
               //------------------------row(recemtfile & see all)-------------------------

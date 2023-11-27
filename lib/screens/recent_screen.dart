@@ -200,7 +200,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 openFile(file);
               },
               child: Card(
-                color: Color.fromARGB(171, 255, 147, 7),
+                color: Color.fromARGB(208, 255, 147, 7),
                 elevation: 7.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
