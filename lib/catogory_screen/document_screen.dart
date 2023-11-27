@@ -25,7 +25,8 @@ class _DocumentScreenState extends State<DocumentScreen> {
       '.docx',
       '.pptx',
       '.xlxs',
-      '.xls'
+      '.xls',
+      '.html'
     ];
     var extension = path.extension(fileName).toLowerCase();
     return documentExtensions.contains(extension);

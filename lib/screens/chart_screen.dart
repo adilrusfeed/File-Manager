@@ -63,7 +63,8 @@ bool isDocumentFile(String fileName) {
     '.docx',
     '.pptx',
     '.xlxs',
-    '.xls'
+    '.xls',
+    '.html'
   ];
   var extension = path.extension(fileName).toLowerCase();
   return documentExtensions.contains(extension);
