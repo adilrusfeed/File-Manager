@@ -99,32 +99,44 @@ class _ChartScreenState extends State<ChartScreen> {
         .length;
 
     pieData = [
-      _PieData('Images', imageCount, 'images\n$imageCount,\nfiles'),
-      _PieData('Videos', videoCount, 'videos\n$videoCount,\nfiles'),
-      _PieData('Audios', audioCount, 'audios\n$audioCount,\nfiles'),
-      _PieData('Documents', documentCount, 'documents\n$documentCount,\nfiles'),
+      _PieData('Images', imageCount, '$imageCount\nfiles'),
+      _PieData('Videos', videoCount, '$videoCount\nfiles'),
+      _PieData('Audios', audioCount, '$audioCount\nfiles'),
+      _PieData('Documents', documentCount, '$documentCount\nfiles'),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return SfCircularChart(
-      title: ChartTitle(
-          text: 'Analyze the files',
-          textStyle: TextStyle(fontWeight: FontWeight.bold)),
-      legend: const Legend(isVisible: true),
-      series: <PieSeries<_PieData, String>>[
-        PieSeries<_PieData, String>(
-          explode: true,
-          explodeIndex: 0,
-          dataSource: pieData,
-          xValueMapper: (_PieData data, z_) => data.xData,
-          yValueMapper: (_PieData data, _) => data.yData,
-          dataLabelMapper: (_PieData data, _) => data.text,
-          dataLabelSettings: const DataLabelSettings(isVisible: true),
+    int totalCount =
+        pieData.map((data) => data.yData.toInt()).reduce((a, b) => a + b);
+    return Stack(children: [
+      SfCircularChart(
+        title: ChartTitle(
+            text: 'Analyze the files',
+            textStyle: TextStyle(fontWeight: FontWeight.bold)),
+        legend: const Legend(isVisible: true),
+        series: <PieSeries<_PieData, String>>[
+          PieSeries<_PieData, String>(
+            explode: true,
+            explodeIndex: 0,
+            dataSource: pieData,
+            xValueMapper: (_PieData data, z_) => data.xData,
+            yValueMapper: (_PieData data, _) => data.yData,
+            dataLabelMapper: (_PieData data, _) => data.text,
+            dataLabelSettings: const DataLabelSettings(isVisible: true),
+          ),
+        ],
+      ),
+      Positioned(
+        bottom: 10.0,
+        left: 10,
+        child: Text(
+          'Total Files:$totalCount',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
-      ],
-    );
+      )
+    ]);
   }
 
   @override

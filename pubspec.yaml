@@ -35,11 +35,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_hooks: any
+  fluttertoast: ^8.2.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hooks_riverpod: any
-  open_file: ^3.3.2
   lottie: ^2.7.0
+  open_file: ^3.3.2
   syncfusion_flutter_charts: ^23.2.4
 
 dev_dependencies:

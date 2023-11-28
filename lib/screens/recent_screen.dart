@@ -163,6 +163,7 @@ class _RecentScreenState extends State<RecentScreen> {
                     child: ListTile(
                         onTap: () {
                           openFile(file);
+                          print(files.length);
                         },
                         title: Text(
                           file.fileName,
@@ -198,6 +199,7 @@ class _RecentScreenState extends State<RecentScreen> {
             return GestureDetector(
               onTap: () {
                 openFile(file);
+                print(files.length);
               },
               child: Card(
                 color: Color.fromARGB(208, 255, 147, 7),

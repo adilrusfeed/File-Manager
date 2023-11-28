@@ -155,16 +155,25 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(22.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "10  / 100",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                         Text("files added"),
+                        ValueListenableBuilder<List<FileModel>>(
+                          valueListenable: FileNotifier,
+                          builder: (context, files, child) {
+                            int totalCount = files.length;
+
+                            return CircleAvatar(
+                              backgroundColor: Colors.black,
+                              child: Text(
+                                totalCount.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                            );
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -175,7 +184,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Recent Files",
                         style: TextStyle(

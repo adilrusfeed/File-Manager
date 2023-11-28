@@ -68,7 +68,7 @@ class _AddScreenState extends State<AddScreen> {
                 onPressed: () async {
                   if (selectedFiles != null && selectedFiles!.isNotEmpty) {
                     for (var file in selectedFiles!) {
-                      await addFile(file);
+                      await pickFile(file);
                     }
 
                     getAlldata();
