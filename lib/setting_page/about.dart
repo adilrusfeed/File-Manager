@@ -67,7 +67,7 @@ class AboutScreen extends StatelessWidget {
                         '# Search Functionality: Quickly locate your files with our robust search feature.',
                         style: TextStyle(fontSize: 18)),
                     Text(
-                        '# Storage Management: Keep track of your storage usage to ensure you never run out of space.',
+                        '# Chart system: Keep track of files added in this app and also view the total count of files in category based and overall files added .',
                         style: TextStyle(fontSize: 18)),
                   ],
                 ),

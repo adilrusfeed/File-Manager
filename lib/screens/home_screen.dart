@@ -11,6 +11,7 @@ import 'package:file_manager/widgets/category.dart';
 import 'package:file_manager/widgets/containersearch.dart';
 import 'package:file_manager/widgets/drawerpage.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
@@ -242,6 +243,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        if (recentFiles.isEmpty)
+                          Lottie.asset("assets/images/empty lottie.json",
+                              height: 250),
                       ],
                     );
                   },

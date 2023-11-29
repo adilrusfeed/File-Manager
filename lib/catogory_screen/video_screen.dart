@@ -27,7 +27,7 @@ class _VideoScreenState extends State<VideoScreen> {
       '.wmv',
       '.mov',
       '.3gp',
-      '.webm'
+      '.webm',
     ];
     var extension = path.extension(fileName).toLowerCase();
     return videoExtensions.contains(extension);

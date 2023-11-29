@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
+import 'package:lottie/lottie.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
@@ -33,6 +34,7 @@ class _RecentScreenState extends State<RecentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<FileModel> files = FileNotifier.value;
     return Scaffold(
         appBar: AppBar(
           actionsIconTheme: IconThemeData(color: Colors.black),
@@ -122,7 +124,9 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             Divider(color: const Color.fromARGB(255, 0, 0, 0), thickness: 1),
             Expanded(
-              child: isListView ? buildListView() : buildGridView(),
+              child: files.isEmpty
+                  ? Lottie.asset("assets/images/emptylist lottie.json")
+                  : (isListView ? buildListView() : buildGridView()),
             )
           ],
         ));
@@ -133,23 +137,7 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
-        if (isSorted) {
-          files.sort((a, b) {
-            return isSorted
-                ? b.fileName.compareTo(a.fileName)
-                : a.fileName.compareTo(b.fileName);
-          });
-        }
-
-        files = files.reversed.toList();
-
-        if (searchQuery.isNotEmpty) {
-          files = files
-              .where((file) => file.fileName
-                  .toLowerCase()
-                  .contains(searchQuery.toLowerCase()))
-              .toList();
-        }
+        files = sorting_searching(files);
 
         return ListView.builder(
           itemCount: files.length,
@@ -163,7 +151,6 @@ class _RecentScreenState extends State<RecentScreen> {
                     child: ListTile(
                         onTap: () {
                           openFile(file);
-                          print(files.length);
                         },
                         title: Text(
                           file.fileName,
@@ -185,7 +172,7 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
-        files = soring_searching(files);
+        files = sorting_searching(files);
 
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -199,7 +186,6 @@ class _RecentScreenState extends State<RecentScreen> {
             return GestureDetector(
               onTap: () {
                 openFile(file);
-                print(files.length);
               },
               child: Card(
                 color: Color.fromARGB(208, 255, 147, 7),
@@ -239,7 +225,7 @@ class _RecentScreenState extends State<RecentScreen> {
     );
   }
 
-  List<FileModel> soring_searching(List<FileModel> files) {
+  List<FileModel> sorting_searching(List<FileModel> files) {
     if (isSorted) {
       files.sort((a, b) => b.fileName.compareTo(a.fileName));
     }

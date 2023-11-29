@@ -35,7 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_hooks: any
-  fluttertoast: ^8.2.4
+  
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hooks_riverpod: any

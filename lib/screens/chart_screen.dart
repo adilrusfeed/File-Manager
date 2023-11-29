@@ -99,10 +99,10 @@ class _ChartScreenState extends State<ChartScreen> {
         .length;
 
     pieData = [
-      _PieData('Images', imageCount, '$imageCount\nfiles'),
-      _PieData('Videos', videoCount, '$videoCount\nfiles'),
-      _PieData('Audios', audioCount, '$audioCount\nfiles'),
-      _PieData('Documents', documentCount, '$documentCount\nfiles'),
+      _PieData('Images', imageCount, '$imageCount\nimages'),
+      _PieData('Videos', videoCount, '$videoCount\nvideos'),
+      _PieData('Audios', audioCount, '$audioCount\naudios'),
+      _PieData('Documents', documentCount, '$documentCount\ndocuments'),
     ];
   }
 
@@ -110,6 +110,7 @@ class _ChartScreenState extends State<ChartScreen> {
   Widget build(BuildContext context) {
     int totalCount =
         pieData.map((data) => data.yData.toInt()).reduce((a, b) => a + b);
+
     return Stack(children: [
       SfCircularChart(
         title: ChartTitle(
@@ -135,14 +136,7 @@ class _ChartScreenState extends State<ChartScreen> {
           'Total Files:$totalCount',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
-      )
+      ),
     ]);
-  }
-
-  @override
-  void dispose() {
-    // Remove the listener to avoid memory leaks
-    FileNotifier.removeListener(() {});
-    super.dispose();
   }
 }
