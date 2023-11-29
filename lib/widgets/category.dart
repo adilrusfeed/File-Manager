@@ -1,9 +1,7 @@
-// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
-class CategoryContainer extends StatelessWidget {
-  const CategoryContainer({
+class categoryContainer extends StatelessWidget {
+  const categoryContainer({
     super.key,
     required this.imagePath,
     required this.containerText,

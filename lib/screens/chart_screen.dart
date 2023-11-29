@@ -13,11 +13,12 @@ class ChartScreen extends StatefulWidget {
 }
 
 class _PieData {
-  _PieData(this.xData, this.yData, this.text);
+  _PieData(this.xData, this.yData, this.text, this.percentage);
 
   final String xData;
   final num yData;
   final String text;
+  final double percentage;
 }
 
 bool isImageFile(String fileName) {
@@ -100,11 +101,33 @@ class _ChartScreenState extends State<ChartScreen> {
         .where((file) => isDocumentFile(file.fileName))
         .length;
 
+    int totalCount = imageCount + videoCount + audioCount + documentCount;
+    double imagePercentage = (imageCount / totalCount) * 100;
+    double videoPercentage = (videoCount / totalCount) * 100;
+    double audioPercentage = (audioCount / totalCount) * 100;
+    double documentPercentage = (documentCount / totalCount) * 100;
+
     pieData = [
-      _PieData('Images', imageCount, '$imageCount\nimages'),
-      _PieData('Videos', videoCount, '$videoCount\nvideos'),
-      _PieData('Audios', audioCount, '$audioCount\naudios'),
-      _PieData('Documents', documentCount, '$documentCount\ndocuments'),
+      _PieData(
+          'Images',
+          imageCount,
+          '$imageCount\n${imagePercentage.toStringAsFixed(2)}%',
+          imagePercentage),
+      _PieData(
+          'Videos',
+          videoCount,
+          '$videoCount\n${videoPercentage.toStringAsFixed(2)}%',
+          videoPercentage),
+      _PieData(
+          'Audios',
+          audioCount,
+          '$audioCount\n${audioPercentage.toStringAsFixed(2)}',
+          audioPercentage),
+      _PieData(
+          'Documents',
+          documentCount,
+          '$documentCount\n${documentPercentage.toStringAsFixed(2)}',
+          documentPercentage),
     ];
   }
 
@@ -131,9 +154,8 @@ class _ChartScreenState extends State<ChartScreen> {
           ),
         ],
       ),
-      Positioned(
-        bottom: 10.0,
-        left: 10,
+      Align(
+        alignment: Alignment.bottomLeft,
         child: Text(
           'Total Files:$totalCount',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
