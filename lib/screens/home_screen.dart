@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:file_manager/catogory_screen/audio_screen.dart';
 import 'package:file_manager/catogory_screen/document_screen.dart';
@@ -8,8 +8,8 @@ import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/screens/recent_screen.dart';
 import 'package:file_manager/widgets/category.dart';
-import 'package:file_manager/widgets/containersearch.dart';
-import 'package:file_manager/widgets/drawerpage.dart';
+import 'package:file_manager/widgets/container_search.dart';
+import 'package:file_manager/widgets/drawer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => ImageScreen(),
                             ));
                           },
-                          child: categoryContainer(
+                          child: CategoryContainer(
                             imagePath: "assets/images/image.png",
                             containerText: "images",
                           ),
@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => VideoScreen(),
                             ));
                           },
-                          child: categoryContainer(
+                          child: CategoryContainer(
                             imagePath: "assets/images/video.png",
                             containerText: "videos",
                           ),
@@ -118,7 +118,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => AudioScreen(),
                             ));
                           },
-                          child: categoryContainer(
+                          child: CategoryContainer(
                             imagePath: "assets/images/music.png",
                             containerText: "audio",
                           ),
@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => DocumentScreen(),
                             ));
                           },
-                          child: categoryContainer(
+                          child: CategoryContainer(
                             imagePath: "assets/images/document.png",
                             containerText: "documents",
                           ),

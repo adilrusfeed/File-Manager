@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, depend_on_referenced_packages
+// ignore_for_file: prefer_const_constructors, depend_on_referenced_packages, avoid_unnecessary_containers
 
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';

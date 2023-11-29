@@ -1,5 +1,7 @@
 //clear from db - reset
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:file_manager/widgets/bottombar.dart';
 import 'package:file_manager/model/data_model.dart';
 

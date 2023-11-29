@@ -30,7 +30,7 @@ class DrawerHeaderWidget extends StatelessWidget {
                 builder: (context) => AboutScreen(),
               ));
             },
-            child: DrawerItem(text: "about", icon: Icons.info),
+            child: DrawerItem(text: "About", icon: Icons.info),
           ),
           Divider(),
           GestureDetector(
@@ -40,7 +40,7 @@ class DrawerHeaderWidget extends StatelessWidget {
               ));
             },
             child: DrawerItem(
-              text: "terms and conditions",
+              text: "Terms and Conditions",
               icon: Icons.document_scanner_rounded,
             ),
           ),
@@ -50,7 +50,7 @@ class DrawerHeaderWidget extends StatelessWidget {
               resetDB(context);
             },
             child: DrawerItem(
-              text: "reset",
+              text: "Reset",
               icon: Icons.restore_from_trash_outlined,
             ),
           ),
@@ -59,7 +59,7 @@ class DrawerHeaderWidget extends StatelessWidget {
             onTap: () {
               exitpopup(context);
             },
-            child: DrawerItem(text: "exit", icon: Icons.exit_to_app),
+            child: DrawerItem(text: "Exit", icon: Icons.exit_to_app),
           ),
           Divider(),
           SizedBox(height: 30),

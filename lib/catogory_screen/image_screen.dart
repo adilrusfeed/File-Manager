@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, depend_on_referenced_packages
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, depend_on_referenced_packages, library_private_types_in_public_api
 
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';

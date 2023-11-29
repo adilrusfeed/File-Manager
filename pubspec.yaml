@@ -41,6 +41,7 @@ dependencies:
   hooks_riverpod: any
   lottie: ^2.7.0
   open_file: ^3.3.2
+  path: ^1.8.3
   syncfusion_flutter_charts: ^23.2.4
 
 dev_dependencies:
