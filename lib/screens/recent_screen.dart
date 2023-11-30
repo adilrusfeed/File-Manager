@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings, library_private_types_in_public_api, prefer_const_constructors_in_immutables, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
@@ -124,9 +124,7 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             Divider(color: const Color.fromARGB(255, 0, 0, 0), thickness: 1),
             Expanded(
-              child: files.length == 0
-                  ? Lottie.asset("assets/images/emptylist lottie.json")
-                  : (isListView ? buildListView() : buildGridView()),
+              child: (isListView ? buildListView() : buildGridView()),
             )
           ],
         ));
@@ -137,7 +135,7 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
-        files = sorting_searching(files);
+        files = sorting_Searching(files);
 
         return ListView.builder(
           itemCount: files.length,
@@ -145,22 +143,28 @@ class _RecentScreenState extends State<RecentScreen> {
             final file = files[index];
             return Padding(
                 padding: EdgeInsets.symmetric(vertical: 2),
-                child: Container(
-                    height: 60,
-                    color: Color.fromARGB(118, 255, 147, 7),
-                    child: ListTile(
-                        onTap: () {
-                          openFile(file);
-                        },
-                        title: Text(
-                          file.fileName,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        leading: Icon(
-                          Icons.file_copy,
-                          color: Colors.black,
-                        ),
-                        trailing: popupmenu(file))));
+                child: Card(
+                  elevation: 3,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color.fromARGB(208, 255, 147, 7),
+                      ),
+                      height: 60,
+                      child: ListTile(
+                          onTap: () {
+                            openFile(file);
+                          },
+                          title: Text(
+                            file.fileName,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          leading: Icon(
+                            Icons.file_copy,
+                            color: Colors.black,
+                          ),
+                          trailing: popupmenu(file))),
+                ));
           },
         );
       },
@@ -172,7 +176,7 @@ class _RecentScreenState extends State<RecentScreen> {
     return ValueListenableBuilder<List<FileModel>>(
       valueListenable: FileNotifier,
       builder: (context, files, child) {
-        files = sorting_searching(files);
+        files = sorting_Searching(files);
 
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -225,7 +229,7 @@ class _RecentScreenState extends State<RecentScreen> {
     );
   }
 
-  List<FileModel> sorting_searching(List<FileModel> files) {
+  List<FileModel> sorting_Searching(List<FileModel> files) {
     if (isSorted) {
       files.sort((a, b) => b.fileName.compareTo(a.fileName));
     }

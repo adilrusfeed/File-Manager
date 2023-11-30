@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_import, library_private_types_in_public_api, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_import, library_private_types_in_public_api, avoid_unnecessary_containers, use_build_context_synchronously
 
 import 'package:file_manager/db/function.dart';
 import 'package:flutter/material.dart';
