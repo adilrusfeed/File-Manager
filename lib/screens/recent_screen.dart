@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
-import 'package:lottie/lottie.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
