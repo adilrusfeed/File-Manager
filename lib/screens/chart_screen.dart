@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:file_manager/db/function.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -13,12 +15,13 @@ class ChartScreen extends StatefulWidget {
 }
 
 class _PieData {
-  _PieData(this.xData, this.yData, this.text, this.percentage);
+  _PieData(this.xData, this.yData, this.text, this.percentage, this.color);
 
   final String xData;
   final num yData;
   final String text;
   final double percentage;
+  final Color color;
 }
 
 bool isImageFile(String fileName) {
@@ -76,6 +79,12 @@ bool isDocumentFile(String fileName) {
 class _ChartScreenState extends State<ChartScreen> {
   late List<_PieData> pieData;
 
+  Color getRandomColor() {
+    Random random = Random();
+    return Color.fromARGB(
+        255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -109,25 +118,30 @@ class _ChartScreenState extends State<ChartScreen> {
 
     pieData = [
       _PieData(
-          'Images',
-          imageCount,
-          '$imageCount\n${imagePercentage.toStringAsFixed(2)}%',
-          imagePercentage),
+        'Images',
+        imageCount,
+        '$imageCount\n${imagePercentage.toStringAsFixed(2)}%',
+        imagePercentage,
+        getRandomColor(),
+      ),
       _PieData(
           'Videos',
           videoCount,
           '$videoCount\n${videoPercentage.toStringAsFixed(2)}%',
-          videoPercentage),
+          videoPercentage,
+          getRandomColor()),
       _PieData(
           'Audios',
           audioCount,
           '$audioCount\n${audioPercentage.toStringAsFixed(2)}',
-          audioPercentage),
+          audioPercentage,
+          getRandomColor()),
       _PieData(
           'Documents',
           documentCount,
           '$documentCount\n${documentPercentage.toStringAsFixed(2)}',
-          documentPercentage),
+          documentPercentage,
+          getRandomColor()),
     ];
   }
 
@@ -151,6 +165,7 @@ class _ChartScreenState extends State<ChartScreen> {
             yValueMapper: (_PieData data, _) => data.yData,
             dataLabelMapper: (_PieData data, _) => data.text,
             dataLabelSettings: const DataLabelSettings(isVisible: true),
+            pointColorMapper: (_PieData data, _) => data.color,
           ),
         ],
       ),
