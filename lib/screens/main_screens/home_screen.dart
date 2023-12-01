@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
-import 'package:file_manager/catogory_screen/audio_screen.dart';
-import 'package:file_manager/catogory_screen/document_screen.dart';
-import 'package:file_manager/catogory_screen/image_screen.dart';
-import 'package:file_manager/catogory_screen/video_screen.dart';
+import 'package:file_manager/screens/catogory_screen/audio_screen.dart';
+import 'package:file_manager/screens/catogory_screen/document_screen.dart';
+import 'package:file_manager/screens/catogory_screen/image_screen.dart';
+import 'package:file_manager/screens/catogory_screen/video_screen.dart';
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';
-import 'package:file_manager/screens/recent_screen.dart';
+import 'package:file_manager/screens/main_screens/recent_screen.dart';
 import 'package:file_manager/widgets/category.dart';
 import 'package:file_manager/widgets/container_search.dart';
 import 'package:file_manager/widgets/drawer_page.dart';

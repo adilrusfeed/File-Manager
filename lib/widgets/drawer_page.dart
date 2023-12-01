@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
-import 'package:file_manager/setting_page/about.dart';
-import 'package:file_manager/setting_page/exit.dart';
-import 'package:file_manager/setting_page/reset.dart';
-import 'package:file_manager/setting_page/terms.dart';
+import 'package:file_manager/screens/setting_page/about.dart';
+import 'package:file_manager/screens/setting_page/exit.dart';
+import 'package:file_manager/screens/setting_page/reset.dart';
+import 'package:file_manager/screens/setting_page/terms.dart';
 import 'package:file_manager/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

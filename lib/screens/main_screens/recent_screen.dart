@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
-import 'package:lottie/lottie.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
@@ -124,9 +123,7 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             Divider(color: const Color.fromARGB(255, 0, 0, 0), thickness: 1),
             Expanded(
-              child: files.isEmpty
-                  ? Lottie.asset("assets/images/emptylist lottie.json")
-                  : (isListView ? buildListView() : buildGridView()),
+              child: (isListView ? buildListView() : buildGridView()),
             )
           ],
         ));
@@ -308,11 +305,29 @@ class _RecentScreenState extends State<RecentScreen> {
         return [
           PopupMenuItem<String>(
             value: 'rename',
-            child: Text('Rename'),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Rename'),
+                Icon(
+                  Icons.drive_file_rename_outline_rounded,
+                  color: Colors.blue,
+                )
+              ],
+            ),
           ),
           PopupMenuItem<String>(
             value: 'delete',
-            child: Text("Delete"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Delete"),
+                Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                )
+              ],
+            ),
           ),
         ];
       },

@@ -50,7 +50,7 @@ class _AddScreenState extends State<AddScreen> {
                     color: Color.fromARGB(255, 240, 236, 236),
                     border: Border.all(
                       width: 2,
-                      color: Color.fromARGB(255, 69, 64, 64),
+                      color: Color.fromARGB(255, 0, 0, 0),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),

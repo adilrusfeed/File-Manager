@@ -1,6 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, deprecated_member_use
 
-import 'package:file_manager/setting_page/terms.dart';
+import 'package:file_manager/screens/setting_page/terms.dart';
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -30,11 +30,6 @@ class AboutScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Version: 1.0.0',
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(height: 20),
-                Text(
                   'Description:',
                   style: TextStyle(
                     fontSize: 18,
@@ -42,7 +37,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Welcome to Explorer, your trusted file organizer. Explorer is the perfect tool to help you manage, secure, and find your files effortlessly.',
+                  'Welcome to Explorer, your trusted file organizer. Explorer is the perfect tool to help you manage, secure, and find your files effortlessly.\nUser can add files easily and store in Explorer.',
                   style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(height: 20),
@@ -58,39 +53,22 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: 15),
                     Text(
-                        '# File Categorization:Organize your files into distinct categories such as images, videos, audios, and documents for easy access.',
+                        '📌 File Categorization:Organize your files into distinct categories such as images, videos, audios, and documents for easy access.',
                         style: TextStyle(fontSize: 18)),
+                    SizedBox(height: 5),
                     Text(
-                        '# Secure Data: Your privacy is our priority. We use the powerful Hive database to ensure the security of your data.',
+                        '📌 Secure Data: Your privacy is our priority. We use the powerful Hive database to ensure the security of your data.',
                         style: TextStyle(fontSize: 18)),
+                    SizedBox(height: 5),
                     Text(
-                        '# Search Functionality: Quickly locate your files with our robust search feature.',
+                        '📌 Search Functionality: Quickly locate your files with our robust search feature.',
                         style: TextStyle(fontSize: 18)),
+                    SizedBox(height: 5),
                     Text(
-                        '# Chart system: Keep track of files added in this app and also view the total count of files in category based and overall files added .',
+                        '📌 Chart system: Keep track of files added in this app and also view the total count of files in category based and overall files added .',
                         style: TextStyle(fontSize: 18)),
+                    SizedBox(height: 5),
                   ],
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Contact Us:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Text.rich(TextSpan(
-                        text: "email :",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15))),
-                  ],
-                ),
-                Text(
-                  'adilrusfeed@gmail.com',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
                 Text(

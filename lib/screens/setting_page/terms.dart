@@ -34,35 +34,31 @@ class TermsScreen extends StatelessWidget {
                 ),
                 Text(
                   """
-                  Welcome to the EXPLORER(file organizer)! By using this app, you agree to these simple terms:
+                  Welcome to the EXPLORER (file organizer)! By using this app, you agree to these simple terms:
 
           1. Use Responsibly: The Explorer App is designed to help you organize and arrange your personal files. Use it responsibly and keep your data accordingly!
 
-          2. Your Content: The data you add is your responsibility.
+          2. Your Content: The data you add is your responsibility.          
 
-          3. Respect Privacy: We care about your privacy. Your use of the app is subject to our Privacy Policy.
+          3. App Ownership: The Explorer App and its content belong to us. Please don't modify, distribute, or reverse engineer the app without our permission.
 
-          4. App Ownership: The Explorer App and its content belong to us. Please don't modify, distribute, or reverse engineer the app without our permission.
+          4. App Changes: We might update the app or these terms. Stay tuned for any announcements from us.
 
-          5. App Changes: We might update the app or these terms. Stay tuned for any announcements from us.
+          5. App Availability: We aim to provide the app 24/7, but we can't guarantee it. We're not responsible for any inconvenience caused by app unavailability.
 
-          6. App Availability: We aim to provide the app 24/7, but we can't guarantee it. We're not responsible for any inconvenience caused by app unavailability.
-
-          7. Get in Touch: If you have questions, reach out to us at
+          6. Get in Touch: If you have questions, reach out to us at
                   """,
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'adilrusfeed@gmail.com',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.blue,
-                    ),
+                Text(
+                  'adilrusfeed@gmail.com',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
                   ),
                 ),
+                const SizedBox(height: 8),
                 const Text('''
-                  By using the Explorer App, you agree to these terms. Keep your personal data "safe"! '''),
+    By using the Explorer App, you agree to these terms.'''),
               ],
             ),
           ),
