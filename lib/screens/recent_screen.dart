@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings, library_private_types_in_public_api, prefer_const_constructors_in_immutables, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings, library_private_types_in_public_api, prefer_const_constructors_in_immutables, non_constant_identifier_names, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
+import 'package:lottie/lottie.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
@@ -123,7 +124,9 @@ class _RecentScreenState extends State<RecentScreen> {
             ),
             Divider(color: const Color.fromARGB(255, 0, 0, 0), thickness: 1),
             Expanded(
-              child: (isListView ? buildListView() : buildGridView()),
+              child: files.isEmpty
+                  ? Lottie.asset("assets/images/emptylist lottie.json")
+                  : (isListView ? buildListView() : buildGridView()),
             )
           ],
         ));
@@ -227,6 +230,7 @@ class _RecentScreenState extends State<RecentScreen> {
       },
     );
   }
+  //---------------------------sorting and searching------------------------------
 
   List<FileModel> sorting_Searching(List<FileModel> files) {
     if (isSorted) {
