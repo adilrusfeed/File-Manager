@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class searchcontainer extends StatelessWidget {
   ///
@@ -23,10 +24,7 @@ class searchcontainer extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: 15),
-            Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
+            Lottie.asset("assets/images/search.json"),
             SizedBox(width: 10),
             Expanded(
               child: Text(

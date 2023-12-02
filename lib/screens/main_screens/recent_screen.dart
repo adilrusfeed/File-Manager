@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:file_manager/db/function.dart';
+import 'package:lottie/lottie.dart';
 
 class RecentScreen extends StatefulWidget {
   RecentScreen({Key? key}) : super(key: key);
@@ -108,10 +109,8 @@ class _RecentScreenState extends State<RecentScreen> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Color.fromARGB(255, 243, 238, 238),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
+                    prefixIcon:
+                        Lottie.asset("assets/images/search.json", height: 60),
                     hintText: 'Search Files',
                     hintStyle: TextStyle(
                         color: Color.fromARGB(255, 192, 187, 187),

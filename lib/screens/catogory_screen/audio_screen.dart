@@ -3,6 +3,7 @@
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path/path.dart' as path;
 
 class AudioScreen extends StatefulWidget {
@@ -68,7 +69,8 @@ class _AudioScreenState extends State<AudioScreen> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromARGB(255, 240, 236, 236),
-                      prefixIcon: Icon(Icons.search, color: Colors.black),
+                      prefixIcon:
+                          Lottie.asset("assets/images/search.json", height: 60),
                       hintText: "search files",
                       hintStyle: TextStyle(
                           color: Color.fromARGB(255, 151, 146, 146),
