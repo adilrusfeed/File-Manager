@@ -102,31 +102,58 @@ class _AddScreenState extends State<AddScreen> {
               Divider(),
               if (selectedFiles != null && selectedFiles!.isNotEmpty)
                 Column(children: [
-                  for (var file in selectedFiles!)
+                  for (int index = 0; index < selectedFiles!.length; index++)
                     GestureDetector(
                       onTap: () {
-                        openFile(file);
+                        openFile(selectedFiles![index]);
                       },
                       child: Container(
-                        padding: EdgeInsets.all(16),
+                        padding: EdgeInsets.all(12),
+                        margin: EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          color: Color.fromARGB(208, 255, 147, 7),
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Column(
+                        child: Stack(
                           children: [
-                            Text(
-                              "Selected File:",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Selected File:",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  selectedFiles![index].name,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 10),
-                            Text(
-                              file.name,
-                              style: TextStyle(
-                                fontSize: 16,
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedFiles!.removeAt(index);
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                      border: Border.all(width: 1)),
+                                  child: Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                    size: 18, // Adjust size for smaller icon
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -134,7 +161,6 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                     ),
                 ]),
-              SizedBox(height: 20),
             ],
           ),
         ),
