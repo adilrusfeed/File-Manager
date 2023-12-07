@@ -172,7 +172,7 @@ class _ChartScreenState extends State<ChartScreen> {
       Align(
         alignment: Alignment.bottomLeft,
         child: Text(
-          'Total Files:$totalCount',
+          '  Totla Files : $totalCount',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
       ),

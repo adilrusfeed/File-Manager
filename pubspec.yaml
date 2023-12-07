@@ -31,19 +31,19 @@ dependencies:
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
   file_picker: ^6.0.0
-  fl_chart: ^0.64.0
+  
   flutter:
     sdk: flutter
-  flutter_hooks: any
+  
 
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  hooks_riverpod: any
+  
   lottie: ^2.7.0
   open_file: ^3.3.2
   path: ^1.8.3
   syncfusion_flutter_charts: ^23.2.4
-  url_launcher: ^6.2.1
+  
 
 dev_dependencies:
   build_runner: ^2.4.6

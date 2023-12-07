@@ -50,6 +50,7 @@ Future<void> openFile(FileModel file) async {
 
   try {
     await OpenFile.open(filePath);
+    print(fileName);
   } catch (error) {
     print(error);
   }
