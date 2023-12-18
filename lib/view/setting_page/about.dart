@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, deprecated_member_use
 
-import 'package:file_manager/screens/setting_page/terms.dart';
+import 'package:file_manager/view/setting_page/terms.dart';
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatelessWidget {

@@ -8,6 +8,8 @@ import 'package:open_file/open_file.dart';
 
 ValueNotifier<List<FileModel>> FileNotifier = ValueNotifier([]);
 
+List<FileModel> recentFiles = [];
+
 Future<void> pickFile(PlatformFile selectedFile) async {
   final fileDB = await Hive.openBox<FileModel>("FileModel_db");
   final file = FileModel(

@@ -1,16 +1,17 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
-import 'package:file_manager/screens/catogory_screen/audio_screen.dart';
-import 'package:file_manager/screens/catogory_screen/document_screen.dart';
-import 'package:file_manager/screens/catogory_screen/image_screen.dart';
-import 'package:file_manager/screens/catogory_screen/video_screen.dart';
 import 'package:file_manager/db/function.dart';
 import 'package:file_manager/model/data_model.dart';
-import 'package:file_manager/screens/main_screens/recent_screen.dart';
-import 'package:file_manager/widgets/category.dart';
-import 'package:file_manager/widgets/container_search.dart';
-import 'package:file_manager/widgets/drawer_page.dart';
-import 'package:file_manager/widgets/pass_files.dart';
+import 'package:file_manager/view/catogory_screen/audio_screen/audio_screen.dart';
+import 'package:file_manager/view/catogory_screen/document_screen/document_screen.dart';
+import 'package:file_manager/view/catogory_screen/image_screen/image_screen.dart';
+import 'package:file_manager/view/catogory_screen/video_screen/video_screen.dart';
+import 'package:file_manager/view/main_screens/recent_screen.dart';
+import 'package:file_manager/view/widget/category.dart';
+import 'package:file_manager/view/widget/container_search.dart';
+import 'package:file_manager/view/widget/drawer_page.dart';
+import 'package:file_manager/view/widget/pass_files.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
